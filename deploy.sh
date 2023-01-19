@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 echo "Pulling from https://github.com/suryaherdiyanto/autocms"
 git pull --no-ff
