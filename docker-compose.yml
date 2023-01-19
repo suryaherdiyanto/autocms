@@ -1,0 +1,45 @@
+version: "3.3"
+
+services:
+    autocms_web:
+        container_name: web
+        build:
+            context: .
+        volumes:
+            - ./:/var/www
+            - ./.nginx/config:/etc/nginx/conf.d
+        ports:
+            - "8080:80"
+        depends_on:
+            - "autocms_db"
+            - "autocms_php"
+        networks:
+            - app
+    autocms_php:
+        container_name: phpfpm
+        build:
+            context: ./.phpfpm
+        ports:
+            - "9000:9000"
+        volumes:
+            - ./:/var/www
+        depends_on:
+            - "autocms_db"
+        networks:
+            - app
+
+    autocms_db:
+        container_name: db
+        image: mariadb:latest
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_ARBITARY: 1
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: test
+        networks:
+            - app
+
+networks:
+    app:
+        driver: bridge
