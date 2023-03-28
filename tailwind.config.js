@@ -15,7 +15,8 @@ module.exports = {
         'primary': "#15132B",
         'primary-darker': "#0D0B21",
         'primary-lighter': "#39365c",
-        'accent-primary': "#6418C3"
+        'accent-primary': "#6418C3",
+        'accent-primary-darker': "#5213a1"
       }
     },
   },
