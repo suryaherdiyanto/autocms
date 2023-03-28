@@ -19,7 +19,8 @@ RUN apk update && apk upgrade && \
     php81-xmlwriter \
     php81-phar \
     shadow \
-    composer
+    composer \
+    bash
 
 RUN mkdir /var/www
 
