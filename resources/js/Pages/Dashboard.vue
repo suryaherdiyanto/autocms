@@ -75,6 +75,18 @@
                         </a-box>
                     </div>
                 </div>
+                <div class="flex">
+                    <div class="w-1/2">
+                        <a-panel title="Example Panel" has-footer>
+                            <template v-slot:content>
+                                <p>The Panel Content</p>
+                            </template>
+                            <template v-slot:footer>
+                                <p>The Panel Footer</p>
+                            </template>
+                        </a-panel>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
