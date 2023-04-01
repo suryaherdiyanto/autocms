@@ -92,7 +92,7 @@
                     <div class="w-full md:pb-2 lg:w-1/2 lg:px-2">
                         <a-panel title="Example Tabel">
                             <template v-slot:content>
-                                <a-table :items="items"></a-table>
+                                <a-table :items="items" :is-loading="isLoading"></a-table>
                             </template>
                         </a-panel>
                     </div>
@@ -104,7 +104,7 @@
 </template>
 
 <script>
-import { reactive } from 'vue';
+import { reactive, onMounted, ref } from 'vue';
 import TheHeader from "../Templates/TheHeader.vue";
 import TheSidebar from '../Templates/TheSidebar.vue';
 
@@ -114,20 +114,27 @@ export default {
         TheSidebar
     },
     setup() {
-        const items = reactive([
-            {
-                email: 'johndoe@gmail.com',
-                first_name: 'John',
-                last_name: 'Doe'
-            },
-            {
-                email: 'melisaangel@gmail.com',
-                first_name: 'Mellisa',
-                last_name: 'Angel'
-            },
-        ])
+        const items = reactive([]);
+        const isLoading = ref(true);
 
-        return { items }
+        onMounted(() => {
+            setTimeout(() => {
+                items.push(...[{
+                    email: 'johndoe@gmail.com',
+                    first_name: 'John',
+                    last_name: 'Doe'
+                },
+                {
+                    email: 'melisaangel@gmail.com',
+                    first_name: 'Mellisa',
+                    last_name: 'Angel'
+                }]);
+
+                isLoading.value = false;
+            }, 1000);
+        })
+
+        return { items, isLoading }
     },
 }
 </script>
