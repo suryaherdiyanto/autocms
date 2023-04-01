@@ -47,14 +47,14 @@ export default {
     },
     setup(props) {
         const table = reactive({
-            headings: [],
+            headings: props.headings,
             data: props.items
         });
         const styles = computed(() => {
             return { 'h-64': props.isLoading };
         });
         watch(table.data, () => {
-            if (table.headings.length === 0 && table.data.length > 0) {
+            if (table.data.length > 0 && table.headings.length === 0) {
                 table.headings = Object.keys(table.data[0]);
             }
         });
