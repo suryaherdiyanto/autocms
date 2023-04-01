@@ -6,6 +6,7 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import AButton from './Components/AButton.vue';
 import ABox from './Components/ABox.vue';
 import APanel from './Components/APanel.vue';
+import ATable from './Components/ATable.vue';
 
 createInertiaApp({
     id: 'app',
@@ -16,6 +17,7 @@ createInertiaApp({
         .component('AButton', AButton)
         .component('ABox', ABox)
         .component('APanel', APanel)
+        .component('ATable', ATable)
         .mount(el)
     },
   })

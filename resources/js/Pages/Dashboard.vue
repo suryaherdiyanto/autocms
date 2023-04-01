@@ -75,7 +75,7 @@
                         </a-box>
                     </div>
                 </div>
-                <div class="flex">
+                <div class="flex gap-4">
                     <div class="w-1/2">
                         <a-panel title="Example Panel" has-footer>
                             <template v-slot:content>
@@ -83,6 +83,13 @@
                             </template>
                             <template v-slot:footer>
                                 <p>The Panel Footer</p>
+                            </template>
+                        </a-panel>
+                    </div>
+                    <div class="w-1/2">
+                        <a-panel title="Example Tabel">
+                            <template v-slot:content>
+                                <a-table :items="items"></a-table>
                             </template>
                         </a-panel>
                     </div>
@@ -94,15 +101,30 @@
 </template>
 
 <script>
+import { reactive } from 'vue';
 import TheHeader from "../Templates/TheHeader.vue";
 import TheSidebar from '../Templates/TheSidebar.vue';
+
 export default {
     components: {
         TheHeader,
         TheSidebar
     },
     setup() {
+        const items = reactive([
+            {
+                email: 'johndoe@gmail.com',
+                first_name: 'John',
+                last_name: 'Doe'
+            },
+            {
+                email: 'melisaangel@gmail.com',
+                first_name: 'Mellisa',
+                last_name: 'Angel'
+            },
+        ])
 
+        return { items }
     },
 }
 </script>
