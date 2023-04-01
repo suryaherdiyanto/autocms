@@ -51,7 +51,7 @@ export default {
             data: props.items
         });
         const styles = computed(() => {
-            return { 'h-32': props.isLoading };
+            return { 'h-64': props.isLoading };
         });
         watch(table.data, () => {
             if (table.headings.length === 0 && table.data.length > 0) {
