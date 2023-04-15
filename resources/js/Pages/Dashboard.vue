@@ -130,7 +130,7 @@ export default {
                     last_name: 'Angel'
                 }]);
 
-                isLoading.value = false;
+                // isLoading.value = false;
             }, 1000);
         })
 
