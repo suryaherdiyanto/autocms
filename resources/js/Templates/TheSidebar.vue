@@ -1,5 +1,5 @@
 <template>
-    <aside class="h-full w-full p-6 bg-primary overflow-x-auto">
+    <aside class="min-h-screen h-full w-full p-6 bg-primary overflow-x-auto">
         <div class="flex pb-6 align-middle justify-center">
             <h1 class="text-white uppercase font-bold">auto cms</h1>
         </div>
