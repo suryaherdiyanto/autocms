@@ -40,7 +40,7 @@
                                     <p class="text-gray-500 text-xs my-2">Example Widget</p>
                                 </div>
                             </div>
-                            <a-button>
+                            <a-button :loading="true">
                                 View More <i class="fa-solid fa-angle-right"></i>
                             </a-button>
                         </a-box>
