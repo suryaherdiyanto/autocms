@@ -1,7 +1,7 @@
 <template>
     <div class="block mb-2">
         <label :for="name" class="text-sm font-bold font-cairo">{{ label }}</label>
-        <input v-model="value" :type="type" :placeholder="placeholder" name="first_name" :id="name" class="w-full h-8 border rounded border-gray-200 outline-none px-1 text-sm focus:border-accent-primary">
+        <textarea v-model="value" :id="name" :placeholder="placeholder" class="w-full h-24 border rounded border-gray-200 outline-none px-1 text-sm focus:border-accent-primary"></textarea>
     </div>
 </template>
 
@@ -9,10 +9,6 @@
 import { computed } from 'vue'
 export default {
     props: {
-        type: {
-            type: String,
-            default: 'text'
-        },
         name: {
             type: String
         },

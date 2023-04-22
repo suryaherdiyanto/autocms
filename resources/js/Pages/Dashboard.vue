@@ -103,10 +103,10 @@
                             <template v-slot:content>
                                 <div class="flex flex-wrap -mx-2 py-2">
                                     <div class="w-full lg:w-1/2 px-2">
-                                        <a-input v-model="form.firstName" label="First Name"></a-input>
+                                        <a-input v-model="form.firstName" placeholder="The First Name" label="First Name"></a-input>
                                     </div>
                                     <div class="w-full lg:w-1/2 px-2">
-                                        <a-input v-model="form.lastName" label="Last Name"></a-input>
+                                        <a-input v-model="form.lastName" placeholder="The Last Name" label="Last Name"></a-input>
                                     </div>
                                 </div>
                                 <div class="flex flex-wrap -mx-2 py-2">
@@ -115,6 +115,11 @@
                                     </div>
                                     <div class="w-full lg:w-1/2 px-2">
                                         <a-input v-model="form.passwordConfirmation" label="Password Confirmation" type="password"></a-input>
+                                    </div>
+                                </div>
+                                <div class="flex flex-wrap -mx-2 py-2">
+                                    <div class="w-full px-2">
+                                        <a-textarea v-model="form.address" label="Address" name="address"></a-textarea>
                                     </div>
                                 </div>
                             </template>

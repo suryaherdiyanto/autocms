@@ -8,6 +8,7 @@ import ABox from './Components/ABox.vue';
 import APanel from './Components/APanel.vue';
 import ATable from './Components/ATable.vue';
 import AInput from './Components/Form/AInput.vue';
+import ATextarea from './Components/Form/ATextarea.vue';
 
 createInertiaApp({
     id: 'app',
@@ -20,6 +21,7 @@ createInertiaApp({
         .component('APanel', APanel)
         .component('ATable', ATable)
         .component('AInput', AInput)
+        .component('ATextarea', ATextarea)
         .mount(el)
     },
   })
