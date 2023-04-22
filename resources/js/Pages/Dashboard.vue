@@ -78,7 +78,7 @@
                         </a-box>
                     </div>
                 </div>
-                <div class="flex flex-wrap -mx-2">
+                <div class="flex flex-wrap -mx-2 py-2">
                     <div class="w-full md:pb-2 lg:w-1/2 lg:px-2">
                         <a-panel title="Example Panel" has-footer>
                             <template v-slot:content>
@@ -93,6 +93,27 @@
                         <a-panel title="Example Tabel">
                             <template v-slot:content>
                                 <a-table :items="items" :is-loading="isLoading"></a-table>
+                            </template>
+                        </a-panel>
+                    </div>
+                </div>
+                <div class="flex flex-wrap -mx-2 py-2">
+                    <div class="w-full lg:px-2">
+                        <a-panel title="Example Form">
+                            <template v-slot:content>
+                                <div class="flex flex-wrap -mx-2 py-2">
+                                    <div class="w-full lg:w-1/2 px-2">
+                                        <a-input v-model="form.firstName" label="First Name"></a-input>
+                                    </div>
+                                    <div class="w-full lg:w-1/2 px-2">
+                                        <a-input v-model="form.lastName" label="Last Name"></a-input>
+                                    </div>
+                                </div>
+                                <div class="flex flex-wrap -mx-2 py-2">
+                                    <div class="w-full px-2">
+                                        <a-input label="Password" type="password"></a-input>
+                                    </div>
+                                </div>
                             </template>
                         </a-panel>
                     </div>
@@ -116,6 +137,11 @@ export default {
     setup() {
         const items = reactive([]);
         const isLoading = ref(true);
+        const form = reactive({
+            firstName: 'The First Name',
+            lastName: '',
+            password: ''
+        });
 
         onMounted(() => {
             setTimeout(() => {
@@ -134,7 +160,7 @@ export default {
             }, 1000);
         })
 
-        return { items, isLoading }
+        return { items, isLoading, form }
     },
 }
 </script>
