@@ -129,7 +129,7 @@
                                 </div>
                                 <div class="flex flex-wrap -mx-2 py-2">
                                     <div class="w-full px-2">
-                                        <a-textarea v-model="form.address" label="Address" error-message="wooo" name="address"></a-textarea>
+                                        <a-textarea v-model="form.address" label="Address" name="address"></a-textarea>
                                     </div>
                                 </div>
                             </template>
