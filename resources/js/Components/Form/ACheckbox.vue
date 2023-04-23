@@ -11,6 +11,9 @@ export default {
         },
         modelValue: {
             type: String
+        },
+        name: {
+            type: String,
         }
     },
     emits: ['update:modelValue'],
