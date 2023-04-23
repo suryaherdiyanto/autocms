@@ -119,6 +119,11 @@
                                 </div>
                                 <div class="flex flex-wrap -mx-2 py-2">
                                     <div class="w-full px-2">
+                                        <a-radio-group v-model="form.option" label="Please select an option" :options="form.radioOptions" name="radio example"></a-radio-group>
+                                    </div>
+                                </div>
+                                <div class="flex flex-wrap -mx-2 py-2">
+                                    <div class="w-full px-2">
                                         <a-textarea v-model="form.address" label="Address" error-message="wooo" name="address"></a-textarea>
                                     </div>
                                 </div>
@@ -149,9 +154,19 @@ export default {
             firstName: '',
             lastName: '',
             password: '',
-            passwordConfirmation: ''
+            passwordConfirmation: '',
+            option: 'option_b',
+            radioOptions: [
+                {
+                    value: 'option_a',
+                    label: 'Option A'
+                },
+                {
+                    value: 'option_b',
+                    label: 'Option B'
+                },
+            ]
         });
-
         onMounted(() => {
             setTimeout(() => {
                 items.push(...[{
