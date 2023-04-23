@@ -134,6 +134,11 @@
                                 </div>
                                 <div class="flex flex-wrap -mx-2 py-2">
                                     <div class="w-full px-2">
+                                        <a-select v-model="form.selected" :items="form.selectItems" filterable multiple></a-select>
+                                    </div>
+                                </div>
+                                <div class="flex flex-wrap -mx-2 py-2">
+                                    <div class="w-full px-2">
                                         <a-textarea v-model="form.address" label="Address" name="address"></a-textarea>
                                     </div>
                                 </div>
@@ -170,6 +175,8 @@ export default {
             option: 'option_b',
             isConfirmed: false,
             hobbies: [],
+            selected: '',
+            selectItems: ['Option A', 'Option B', 'Option C'],
             radioOptions: [
                 {
                     value: 'option_a',
