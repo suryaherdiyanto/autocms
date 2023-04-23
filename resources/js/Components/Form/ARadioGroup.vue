@@ -3,7 +3,7 @@
         <label class="block text-sm font-bold font-cairo">{{ label }}</label>
         <div class="flex flex-wrap">
             <div v-for="(option, key) in options" :key="key">
-                <input v-model="value" type="radio" :name="name" :id="option.value" :value="option.value" :checked="value === option.value"> <label class="text-sm font-semibold mr-2" :for="option.value">{{ option.label }}</label>
+                <input v-model="value" class="text-accent-primary focus:outline-accent-primary" type="radio" :name="name" :id="option.value" :value="option.value" :checked="value === option.value"> <label class="text-sm font-semibold mr-2" :for="option.value">{{ option.label }}</label>
             </div>
         </div>
     </div>
