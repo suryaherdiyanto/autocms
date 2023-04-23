@@ -129,6 +129,11 @@
                                 </div>
                                 <div class="flex flex-wrap -mx-2 py-2">
                                     <div class="w-full px-2">
+                                        <a-checkbox-group v-model="form.hobbies" label="Please select your hobbies" :options="form.hobbyOptions" name="Check Multiple Example"></a-checkbox-group>
+                                    </div>
+                                </div>
+                                <div class="flex flex-wrap -mx-2 py-2">
+                                    <div class="w-full px-2">
                                         <a-textarea v-model="form.address" label="Address" name="address"></a-textarea>
                                     </div>
                                 </div>
@@ -146,11 +151,13 @@
 import { reactive, onMounted, ref } from 'vue';
 import TheHeader from "../Templates/TheHeader.vue";
 import TheSidebar from '../Templates/TheSidebar.vue';
+import ACheckboxGroup from '../Components/Form/ACheckboxGroup.vue';
 
 export default {
     components: {
         TheHeader,
-        TheSidebar
+        TheSidebar,
+        ACheckboxGroup
     },
     setup() {
         const items = reactive([]);
@@ -162,6 +169,7 @@ export default {
             passwordConfirmation: '',
             option: 'option_b',
             isConfirmed: false,
+            hobbies: [],
             radioOptions: [
                 {
                     value: 'option_a',
@@ -171,6 +179,20 @@ export default {
                     value: 'option_b',
                     label: 'Option B'
                 },
+            ],
+            hobbyOptions: [
+                {
+                    value: 'hiking',
+                    label: 'Hiking'
+                },
+                {
+                    value: 'cycling',
+                    label: 'Cycling'
+                },
+                {
+                    value: 'koding',
+                    label: 'Koding'
+                }
             ]
         });
         onMounted(() => {

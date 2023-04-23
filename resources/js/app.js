@@ -11,6 +11,7 @@ import AInput from './Components/Form/AInput.vue';
 import ATextarea from './Components/Form/ATextarea.vue';
 import ARadioGroup from './Components/Form/ARadioGroup.vue';
 import ACheckbox from './Components/Form/ACheckbox.vue';
+import ACheckboxGroup from './Components/Form/ACheckboxGroup.vue';
 
 createInertiaApp({
     id: 'app',
@@ -26,6 +27,7 @@ createInertiaApp({
         .component('ATextarea', ATextarea)
         .component('ARadioGroup', ARadioGroup)
         .component('ACheckbox', ACheckbox)
+        .component('ACheckboxGroup', ACheckboxGroup)
         .mount(el)
     },
   })
