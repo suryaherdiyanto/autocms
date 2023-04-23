@@ -1,7 +1,7 @@
 <template>
     <div class="block mb-2">
         <label :for="name" class="text-sm font-bold font-cairo">{{ label }}</label>
-        <input v-model="value" :type="type" :placeholder="placeholder" name="first_name" :id="name" :class="{'border-gray-200': !errorMessage, 'border-red-400': errorMessage}" class="w-full h-8 border rounded outline-none px-1 text-sm focus:border-accent-primary">
+        <input v-model="value" :type="type" :placeholder="placeholder" name="first_name" :id="name" :class="{'border-gray-400': !errorMessage, 'border-red-400': errorMessage}" class="w-full h-8 border rounded px-1 text-sm font-semibold focus:ring-accent-primary focus:border-accent-primary active:border-accent-primary">
         <span v-if="errorMessage" class="text-sm text-red-400 font-semibold">{{ errorMessage }}</span>
     </div>
 </template>
