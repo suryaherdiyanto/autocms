@@ -10,6 +10,7 @@ import ATable from './Components/ATable.vue';
 import AInput from './Components/Form/AInput.vue';
 import ATextarea from './Components/Form/ATextarea.vue';
 import ARadioGroup from './Components/Form/ARadioGroup.vue';
+import ACheckbox from './Components/Form/ACheckbox.vue';
 
 createInertiaApp({
     id: 'app',
@@ -24,6 +25,7 @@ createInertiaApp({
         .component('AInput', AInput)
         .component('ATextarea', ATextarea)
         .component('ARadioGroup', ARadioGroup)
+        .component('ACheckbox', ACheckbox)
         .mount(el)
     },
   })

@@ -127,6 +127,11 @@
                                         <a-textarea v-model="form.address" label="Address" error-message="wooo" name="address"></a-textarea>
                                     </div>
                                 </div>
+                                <div class="flex flex-wrap -mx-2 py-2">
+                                    <div class="w-full px-2">
+                                        <a-checkbox v-model="form.isConfirmed" label="Confirmed?"></a-checkbox>
+                                    </div>
+                                </div>
                             </template>
                         </a-panel>
                     </div>
@@ -156,6 +161,7 @@ export default {
             password: '',
             passwordConfirmation: '',
             option: 'option_b',
+            isConfirmed: false,
             radioOptions: [
                 {
                     value: 'option_a',
