@@ -1,7 +1,8 @@
 <template>
     <div class="block mb-2">
         <label :for="name" class="text-sm font-bold font-cairo">{{ label }}</label>
-        <textarea v-model="value" :id="name" :placeholder="placeholder" class="w-full h-24 border rounded border-gray-200 outline-none px-1 text-sm focus:border-accent-primary"></textarea>
+        <textarea v-model="value" :id="name" :placeholder="placeholder" :class="{'border-gray-200': !errorMessage, 'border-red-400': errorMessage}" class="w-full h-24 border rounded outline-none px-1 text-sm focus:border-accent-primary"></textarea>
+        <span v-if="errorMessage" class="text-sm text-red-400 font-semibold">{{ errorMessage }}</span>
     </div>
 </template>
 
@@ -20,6 +21,10 @@ export default {
         },
         modelValue: {
             type: String
+        },
+        errorMessage: {
+            type: String,
+            default: null
         }
     },
     emits: ['update:modelValue'],
