@@ -11,9 +11,9 @@
 
         <div
 
-            class="w-full h-9 p-1.5 font-light border border-gray-200 rounded-md font-sm group-focus:border-gray-800 focus:border-gray-800 hover:border-gray-400"
+            class="w-full h-8 p-1.5 font-sm border border-gray-400 rounded group-focus:border-gray-800 focus:border-gray-800 hover:border-gray-400"
         >
-            <span v-if="!modelValue" class="text-gray-400">{{ placeholder }}</span>
+            <span v-if="!modelValue" class="text-gray-400 text-sm">{{ placeholder }}</span>
             <span v-if="modelValue && multiple" class="mr-1 bg-blue-500 text-white inline-block px-1 py-0.5 text-xs font-medium rounded-xl">
                 {{ modelValue }} <a href="#" class="ml-0.5">&times;</a>
             </span>
@@ -40,7 +40,7 @@
                         v-if="filterable"
                         v-model="search"
                         ref="_select_filter"
-                        class="w-full h-7 font-light p-3 border border-gray-200 rounded-md font-sm focus:outline-none"
+                        class="w-full h-8 font-light p-3 border border-gray-400 rounded font-sm focus:outline-none"
                         placeholder="Search...."
                         :class="{ 'border-green-500': isSuccess, 'border-red-500': isError, 'hover:border-gray-400': (!isError && !isSuccess), 'focus:border-gray-800': (!isError && !isSuccess) }"
                     >
@@ -49,7 +49,7 @@
                     v-for="(item,index) in filteredItems"
                     @click.stop="chooseItem(item)"
                     :key="index"
-                    class="block cursor-pointer p-2 hover:bg-gray-200"
+                    class="block text-sm cursor-pointer py-1 px-2 hover:bg-gray-200"
                     :class="{ 'bg-gray-200': item.selected }"
                 >
                     {{ item.value }}
