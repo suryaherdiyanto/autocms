@@ -11,7 +11,7 @@
 
         <div
 
-            class="w-full h-8 p-1.5 font-sm border border-gray-400 rounded group-focus:border-gray-800 focus:border-gray-800 hover:border-gray-400"
+            class="w-full h-8 p-1.5 font-sm border border-gray-400 rounded group-focus:shadow group-focus:border-2 group-focus:border-accent-primary hover:border-accent-primary "
         >
             <span v-if="!modelValue" class="text-gray-400 text-sm">{{ placeholder }}</span>
             <span v-if="modelValue && multiple" class="mr-1 bg-blue-500 text-white inline-block px-1 py-0.5 text-xs font-medium rounded">
