@@ -19,9 +19,10 @@
             </span>
             <span v-if="!multiple">{{ modelValue }}</span>
             <span
-                class="relative right-1.5 w-5 h-5 text-center transition-transform float-right custom-border-color origin-center before:relative before:top-1/2 before:align-middle before:w-6 before:h-6 before:border-t-4 before:border-r-4 before:border-l-4 before:border-b-0"
+                class="flex justify-center items-center relative right-1.5 w-5 h-5 transition-transform duration-200 float-right text-gray-400"
                 :class="{showItems, 'transform': showItems, 'rotate-180': showItems}"
                 >
+                <i class="fa-solid fa-caret-down"></i>
             </span>
         </div>
 
