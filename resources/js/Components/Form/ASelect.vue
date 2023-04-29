@@ -6,7 +6,7 @@
         @keyup.esc="deactivate()"
         class="relative outline-none"
         :tabindex="0"
-        ref="_select_wrap"
+        ref="selectWrap"
     >
 
         <div
@@ -40,10 +40,10 @@
                         @keyup.prevent.down="selectItem"
                         v-if="filterable"
                         v-model="search"
-                        ref="_select_filter"
+                        ref="selectFilter"
                         class="w-full h-8 font-light p-3 border border-gray-400 rounded font-sm focus:outline-none"
                         placeholder="Search...."
-                        :class="{ 'border-green-500': isSuccess, 'border-red-500': isError, 'hover:border-gray-400': (!isError && !isSuccess), 'focus:border-gray-800': (!isError && !isSuccess) }"
+                        :class="{'border-gray-400': !errorMessage, 'border-red-400': errorMessage}"
                     >
                 </li>
                 <li
@@ -62,15 +62,11 @@
 </template>
 
 <script>
+import { computed, ref, onMounted, reactive } from 'vue';
 export default {
     props: {
-        isError: {
-            type: Boolean,
-            default: false
-        },
-        isSuccess: {
-            type: Boolean,
-            default: false
+        errorMessage: {
+            type: String,
         },
         placeholder: {
             type: String,
@@ -98,103 +94,121 @@ export default {
             type: [String, Array]
         }
     },
-    computed: {
-        filteredItems() {
+    emits: ['update:modelValue'],
+    setup(props, { emit }) {
+        const search = ref('');
+        const selectItems = reactive([]);
+        const selectedItem = ref(null);
+        const selectPosition = ref(-1);
+        const showItems = ref(false);
 
-            if (this.search === '') {
-                return this.selectItems;
+        const selectFilter = ref(null);
+        const selectWrap = ref(null);
+
+        const filteredItems = computed(() => {
+            if (search === '') {
+                return selectItems;
             }
 
-            return this.selectItems.filter((item) => {
-                return item.value.toLowerCase().indexOf(this.search.toLowerCase()) >= 0;
+            return selectItems.filter((item) => {
+                return item.value.toLowerCase().indexOf(search.value.toLowerCase()) >= 0;
             });
-        }
-    },
-    data() {
-        return {
-            selectItems: [],
-            selectPosition: -1,
-            selectedItem: null,
-            showItems: false,
-            search: ''
-        }
-    },
-    methods: {
-        selectItem($event) {
+        });
 
-            if (this.selectPosition > -1) {
-                this.selectItems[this.selectPosition].selected = false;
+        function selectItem($event) {
+            if (selectPosition.value > -1) {
+                selectItems[selectPosition.value].selected = false;
             }
 
             if ($event.code === 'ArrowDown' || $event.keyCode === 40) {
-                if (this.selectPosition === this.selectItems.length-1) {
+                if (selectPosition.value === selectItems.length-1) {
                     return;
                 }
 
-                this.selectPosition += 1;
-                if (this.selectItems[this.selectPosition]) {
-                    this.selectItems[this.selectPosition].selected = true;
+                selectPosition.value += 1;
+                if (selectItems[selectPosition.value]) {
+                    selectItems[selectPosition.value].selected = true;
                 }
             }
 
             if ($event.code === 'ArrowUp' || $event.keyCode === 38) {
 
-                if (this.selectPosition === -1) {
+                if (selectPosition.value === -1) {
                     return;
                 }
 
-                this.selectPosition -= 1;
-                if (this.selectItems[this.selectPosition]) {
-                    this.selectItems[this.selectPosition].selected = true;
+                selectPosition.value -= 1;
+                if (selectItems[selectPosition.value]) {
+                    selectItems[selectPosition.value].selected = true;
                 }
             }
-        },
-        chooseItem(item = null) {
+        }
+
+        function chooseItem(item = null) {
             if (item === null) {
-                this.selectedItem = this.selectItems[this.selectPosition].value;
-                this.selectItems[this.selectPosition].selected = false;
-                this.selectPosition = -1;
+                selectedItem.value = selectItems[selectPosition.value].value;
+                selectItems[selectPosition.value].selected = false;
+                selectPosition.value = -1;
             } else {
-                this.selectedItem = item.value;
-                this.selectPosition = -1;
+                selectedItem.value = item.value;
+                selectPosition.value = -1;
             }
 
-            if (!this.multiple || this.filterable) {
-                this.deactivate();
-                this.$refs._select_wrap.blur();
+            if (!props.multiple || props.filterable) {
+                deactivate();
+                selectWrap.value.blur();
             }
 
-            this.$emit('update:modelValue', this.selectedItem);
-        },
-        populateItems() {
-            this.items.forEach((item) => {
+            emit('update:modelValue', selectedItem);
+        }
+
+        function populateItems() {
+            props.items.forEach((item) => {
 
                 if (typeof(item) === "object") {
-                    this.selectItems.push({ key: this.keyValue, value: this.items[this.keyValue], selected: false });
+                    selectItems.push({ key: keyValue, value: items[keyValue], selected: false });
                 } else {
-                    this.selectItems.push({ key: item, value: item, selected: false });
+                    selectItems.push({ key: item, value: item, selected: false });
                 }
             });
-        },
-        deactivate() {
-
-            if (this.$refs._select_filter) {
-                this.$refs._select_filter.blur();
-            }
-
-            this.showItems = false;
-        },
-        activate() {
-
-            if (this.filterable && this.$refs._select_filter) {
-                this.$refs._select_filter.focus();
-            }
-
-            this.showItems = true;
         }
-    },
-    created() {
-        this.populateItems();
+
+        function deactivate() {
+
+            if (selectFilter.value) {
+                selectFilter.value.blur();
+            }
+
+            showItems.value = false;
+        }
+
+        function activate() {
+
+            if (props.filterable && selectFilter.value) {
+                selectFilter.value.focus();
+            }
+
+            showItems.value = true;
+        }
+
+        onMounted(() => {
+            populateItems();
+        });
+
+        return {
+            search,
+            selectedItem,
+            selectPosition,
+            showItems,
+            filteredItems,
+            selectFilter,
+            selectWrap,
+            selectItem,
+            chooseItem,
+            populateItems,
+            activate,
+            deactivate
+        }
     }
 }
 </script>
