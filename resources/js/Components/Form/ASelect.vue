@@ -173,7 +173,7 @@ export default {
             props.items.forEach((item) => {
 
                 if (typeof(item) === "object") {
-                    selectItems.push({ key: keyValue, value: items[keyValue], selected: false });
+                    selectItems.push({ key: keyValue, value: props.items[keyValue], selected: false });
                 } else {
                     selectItems.push({ key: item, value: item, selected: false });
                 }
