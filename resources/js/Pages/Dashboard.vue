@@ -134,7 +134,7 @@
                                 </div>
                                 <div class="flex flex-wrap -mx-2 py-2">
                                     <div class="w-full px-2">
-                                        <a-select v-model="form.selected" :items="form.selectItems" filterable multiple></a-select>
+                                        <a-select v-model="form.selected" label="Example Select" :items="form.selectItems" filterable multiple></a-select>
                                     </div>
                                 </div>
                                 <div class="flex flex-wrap -mx-2 py-2">

@@ -8,9 +8,9 @@
         :tabindex="0"
         ref="selectWrap"
     >
-
+        <label :for="name" class="text-sm font-bold font-cairo">{{ label }}</label>
         <div
-
+            :id="name"
             class="w-full h-8 p-1.5 font-sm border border-gray-400 rounded group-focus:shadow group-focus:border-2 group-focus:border-accent-primary hover:border-accent-primary "
         >
             <span v-if="!modelValue" class="text-gray-400 text-sm">{{ placeholder }}</span>
@@ -92,6 +92,13 @@ export default {
         },
         modelValue: {
             type: [String, Array]
+        },
+        label: {
+            type: String,
+            default: ''
+        },
+        name: {
+            type: String
         }
     },
     emits: ['update:modelValue'],
