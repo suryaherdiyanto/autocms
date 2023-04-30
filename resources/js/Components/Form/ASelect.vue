@@ -16,7 +16,7 @@
             <span v-if="!modelValue" class="text-gray-400 text-sm">{{ placeholder }}</span>
             <div v-if="modelValue && multiple">
                 <span v-for="(item, key) in selectedItems" :key="key" class="mr-1 bg-blue-500 text-white inline-block px-1 py-0.5 text-xs font-medium rounded">
-                    {{ item.value }} <a @click="removeItem(item)" href="#" class="ml-0.5">&times;</a>
+                    {{ item.value }} <a @click.prevent="removeItem(item)" href="#" class="ml-0.5">&times;</a>
                 </span>
             </div>
             <span v-if="!multiple">{{ modelValue }}</span>
@@ -53,7 +53,7 @@
                     @click.stop="chooseItem(item)"
                     :key="index"
                     class="block text-sm cursor-pointer py-1 px-2 hover:bg-gray-200"
-                    :class="{ 'bg-gray-200': item.selected }"
+                    :class="{ 'bg-gray-200': (selectedItems.findIndex(i => i.key === item.key) >= 0) }"
                 >
                     {{ item.value }}
                 </li>
@@ -158,7 +158,11 @@ export default {
             const {key, value} = item;
 
             if (props.multiple) {
-                selectedItems.push({ key, value });
+                const itemExists = selectedItems.findIndex(i => i.key === item.key);
+
+                if (itemExists === -1) {
+                    selectedItems.push({ key, value });
+                }
             } else {
                 selectedItem.value = { key, value };
             }
@@ -202,6 +206,11 @@ export default {
             showItems.value = true;
         }
 
+        function removeItem(item) {
+            const itemIndex = selectedItems.findIndex(i => i.key === item.key);
+            selectedItems.splice(itemIndex, 1);
+        }
+
         onMounted(() => {
             populateItems();
         });
@@ -219,7 +228,8 @@ export default {
             populateItems,
             activate,
             deactivate,
-            selectedItems
+            selectedItems,
+            removeItem
         }
     }
 }
