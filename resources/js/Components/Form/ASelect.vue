@@ -14,9 +14,11 @@
             class="w-full h-8 p-1.5 font-sm border border-gray-400 rounded group-focus:shadow group-focus:border-2 group-focus:border-accent-primary hover:border-accent-primary "
         >
             <span v-if="!modelValue" class="text-gray-400 text-sm">{{ placeholder }}</span>
-            <span v-if="modelValue && multiple" class="mr-1 bg-blue-500 text-white inline-block px-1 py-0.5 text-xs font-medium rounded">
-                {{ modelValue }} <a href="#" class="ml-0.5">&times;</a>
-            </span>
+            <div v-if="modelValue && multiple">
+                <span v-for="(item, key) in selectedItems" :key="key" class="mr-1 bg-blue-500 text-white inline-block px-1 py-0.5 text-xs font-medium rounded">
+                    {{ item }} <a href="#" class="ml-0.5">&times;</a>
+                </span>
+            </div>
             <span v-if="!multiple">{{ modelValue }}</span>
             <span
                 class="flex justify-center items-center relative right-1.5 w-5 h-5 transition-transform duration-200 float-right text-gray-400"
@@ -106,6 +108,7 @@ export default {
         const search = ref('');
         const selectItems = reactive([]);
         const selectedItem = ref(null);
+        const selectedItems = reactive([]);
         const selectPosition = ref(-1);
         const showItems = ref(false);
 
@@ -152,21 +155,20 @@ export default {
         }
 
         function chooseItem(item = null) {
-            if (item === null) {
-                selectedItem.value = selectItems[selectPosition.value].value;
-                selectItems[selectPosition.value].selected = false;
-                selectPosition.value = -1;
+            if (props.multiple) {
+                selectedItems.push(item.value);
             } else {
                 selectedItem.value = item.value;
-                selectPosition.value = -1;
             }
+
+            selectPosition.value = -1;
 
             if (!props.multiple || props.filterable) {
                 deactivate();
                 selectWrap.value.blur();
             }
 
-            emit('update:modelValue', selectedItem);
+            emit('update:modelValue', (props.multiple) ? selectedItems : selectedItem);
         }
 
         function populateItems() {
@@ -214,7 +216,8 @@ export default {
             chooseItem,
             populateItems,
             activate,
-            deactivate
+            deactivate,
+            selectedItems
         }
     }
 }
