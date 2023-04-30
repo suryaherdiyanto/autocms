@@ -12,7 +12,7 @@
                     <p class="text-gray-500 text-sm">Lorem ipsum dolor.</p>
                 </div>
 
-                <div class="flex flex-wrap -mx-2 py-2">
+                <a-row>
                     <div class="w-full md:w-1/2 lg:w-1/4 px-2 mb-2">
                         <a-box>
                             <div class="flex mb-4">
@@ -77,8 +77,8 @@
                             </a-button>
                         </a-box>
                     </div>
-                </div>
-                <div class="flex flex-wrap -mx-2 py-2">
+                </a-row>
+                <a-row>
                     <div class="w-full md:pb-2 lg:w-1/2 lg:px-2">
                         <a-panel title="Example Panel" has-footer>
                             <template v-slot:content>
@@ -96,8 +96,8 @@
                             </template>
                         </a-panel>
                     </div>
-                </div>
-                <div class="flex flex-wrap -mx-2 py-2">
+                </a-row>
+                <a-row>
                     <div class="w-full lg:px-2">
                         <a-panel title="Example Form">
                             <template v-slot:content>
@@ -150,7 +150,7 @@
                             </template>
                         </a-panel>
                     </div>
-                </div>
+                </a-row>
             </div>
         </div>
     </div>
