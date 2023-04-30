@@ -16,7 +16,7 @@
             <span v-if="!modelValue" class="text-gray-400 text-sm">{{ placeholder }}</span>
             <div v-if="modelValue && multiple">
                 <span v-for="(item, key) in selectedItems" :key="key" class="mr-1 bg-blue-500 text-white inline-block px-1 py-0.5 text-xs font-medium rounded">
-                    {{ item }} <a href="#" class="ml-0.5">&times;</a>
+                    {{ item.value }} <a @click="removeItem(item)" href="#" class="ml-0.5">&times;</a>
                 </span>
             </div>
             <span v-if="!multiple">{{ modelValue }}</span>
@@ -155,10 +155,12 @@ export default {
         }
 
         function chooseItem(item = null) {
+            const {key, value} = item;
+
             if (props.multiple) {
-                selectedItems.push(item.value);
+                selectedItems.push({ key, value });
             } else {
-                selectedItem.value = item.value;
+                selectedItem.value = { key, value };
             }
 
             selectPosition.value = -1;
