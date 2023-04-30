@@ -43,7 +43,7 @@
                         v-if="filterable"
                         v-model="search"
                         ref="selectFilter"
-                        class="w-full h-8 font-light p-3 border border-gray-400 rounded font-sm focus:outline-none"
+                        class="w-full h-8 p-3 border border-gray-400 rounded text-sm font-semibold focus:outline-none"
                         placeholder="Search...."
                         :class="{'border-gray-400': !errorMessage, 'border-red-400': errorMessage}"
                     >
