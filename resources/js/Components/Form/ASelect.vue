@@ -11,7 +11,7 @@
         <label :for="name" class="text-sm font-bold font-cairo">{{ label }}</label>
         <div
             :id="name"
-            class="w-full h-8 p-1.5 border border-gray-400 rounded group-focus:shadow group-focus:border-2 group-focus:border-accent-primary hover:border-accent-primary "
+            class="w-full p-1.5 border border-gray-400 rounded group-focus:shadow group-focus:border-2 group-focus:border-accent-primary hover:border-accent-primary "
         >
             <span v-if="!modelValue" class="text-gray-400 text-sm">{{ placeholder }}</span>
             <div v-if="modelValue && multiple">
