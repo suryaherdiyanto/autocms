@@ -11,7 +11,7 @@
         <label :for="name" class="text-sm font-bold font-cairo">{{ label }}</label>
         <div
             :id="name"
-            class="w-full h-8 p-1.5 font-sm border border-gray-400 rounded group-focus:shadow group-focus:border-2 group-focus:border-accent-primary hover:border-accent-primary "
+            class="w-full h-8 p-1.5 border border-gray-400 rounded group-focus:shadow group-focus:border-2 group-focus:border-accent-primary hover:border-accent-primary "
         >
             <span v-if="!modelValue" class="text-gray-400 text-sm">{{ placeholder }}</span>
             <div v-if="modelValue && multiple">
@@ -19,7 +19,7 @@
                     {{ item.value }} <a @click.prevent="removeItem(item)" href="#" class="ml-0.5">&times;</a>
                 </span>
             </div>
-            <span v-if="!multiple">{{ modelValue }}</span>
+            <span class="text-sm font-semibold" v-if="!multiple">{{ modelValue.value }}</span>
             <span
                 class="flex justify-center items-center relative right-1.5 w-5 h-5 transition-transform duration-200 float-right text-gray-400"
                 :class="{showItems, 'transform': showItems, 'rotate-180': showItems}"
