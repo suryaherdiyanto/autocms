@@ -15,6 +15,7 @@ import ACheckboxGroup from './Components/Form/ACheckboxGroup.vue';
 import ASelect from './Components/Form/ASelect.vue';
 import AEditor from './Components/Form/AEditor.vue';
 import ARow from './Components/ARow.vue';
+import AAlert from './Components/AAlert.vue';
 
 createInertiaApp({
     id: 'app',
@@ -34,6 +35,7 @@ createInertiaApp({
         .component('ASelect', ASelect)
         .component('AEditor', AEditor)
         .component('ARow', ARow)
+        .component('AAlert', AAlert)
         .mount(el)
     },
   })

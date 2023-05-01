@@ -98,7 +98,7 @@
                     </div>
                 </a-row>
                 <a-row>
-                    <div class="w-full lg:px-2">
+                    <div class="w-full lg:px-2 lg:pb-2">
                         <a-panel title="Example Form">
                             <template v-slot:content>
                                 <a-row>
@@ -147,6 +147,16 @@
                                         <a-editor v-model="form.editor" label="Example editor" name="content" />
                                     </div>
                                 </a-row>
+                            </template>
+                        </a-panel>
+                    </div>
+                    <div class="w-full lg:px-2">
+                        <a-panel title="Example Alert">
+                            <template v-slot:content>
+                                <a-alert title="Hello World" message="Alert Content" />
+                                <a-alert title="Hello World" message="Alert Content" type="warning" />
+                                <a-alert title="Hello World" message="Alert Content" type="info" />
+                                <a-alert title="Hello World" message="Alert Content" type="danger" />
                             </template>
                         </a-panel>
                     </div>
