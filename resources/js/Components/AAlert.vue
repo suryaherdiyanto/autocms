@@ -2,7 +2,7 @@
     <transition name="fade">
     <div v-if="!isClosed" :class="typeStyle.bg" class="block border p-3 rounded mb-2">
         <div class="flex">
-            <p :class="typeStyle.text" class="text-sm"> <i class="fa-solid fa-circle-exclamation"></i> &nbsp; {{ message }}</p>
+            <p :class="typeStyle.text" class="text-sm"> <i :class="typeStyle.icon"></i> &nbsp; {{ message }}</p>
             <a @click.prevent="closeAlert" :class="typeStyle.text" class="text-sm font-semibold ml-auto" href="#"><i class="fa-solid fa-times"></i></a>
         </div>
     </div>
@@ -35,6 +35,9 @@ export default {
                         },
                         text: {
                             'text-yellow-500': true
+                        },
+                        icon: {
+                            'fa-solid fa-triangle-exclamation': true
                         }
                     }
                     break;
@@ -47,6 +50,9 @@ export default {
                         },
                         text: {
                             'text-green-500': true
+                        },
+                        icon: {
+                            'fa-solid fa-circle-check': true
                         }
                     }
                     break;
@@ -59,6 +65,9 @@ export default {
                         },
                         text: {
                             'text-red-500': true
+                        },
+                        icon: {
+                            'fa-regular fa-circle-xmark': true
                         }
                     }
                     break;
@@ -71,6 +80,9 @@ export default {
                         },
                         text: {
                             'text-blue-500': true
+                        },
+                        icon: {
+                            'fa-solid fa-circle-exclamation': true
                         }
                     }
                     break;
