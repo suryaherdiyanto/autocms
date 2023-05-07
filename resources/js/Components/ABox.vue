@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { reactive, defineProps } from 'vue';
+import { reactive, defineProps, withDefaults } from 'vue';
 
 interface Box {
-    isPanel: Boolean
+    isPanel: boolean
 }
 
-const props = defineProps<Box>();
+const props = withDefaults(defineProps<Box>(), {
+    isPanel: false
+});
 
 const atts = reactive<Object>({
     'p-5': true,
