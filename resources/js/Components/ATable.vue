@@ -63,15 +63,14 @@ function uppercaseWord(text: string) {
 </template>
 
 <style scoped>
-.fadeIn-enter-active,
 .fadeOut-enter-active,
-.fadeOut-leave-active,
-.fadeIn-leave-active {
-  transition: opacity 0.35s ease;
+.fadeOut-leave-active{
+  transition: opacity 0.35s ease-out;
 }
 
 .fadeIn-enter-active, .fadeIn-leave-active {
-    transition-delay: 180ms;
+    transition: opacity 0.400s ease-in;
+    transition-delay: 100ms;
 }
 
 .fadeIn-enter-from {
