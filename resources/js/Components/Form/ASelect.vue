@@ -1,10 +1,15 @@
 <script setup lang="ts">
 import { computed, ref, onMounted, reactive, defineProps, withDefaults, defineEmits } from 'vue';
 
+interface Item {
+    key: string|number,
+    value: string|number
+}
+
 interface Props {
     name: string,
     label: string,
-    modelValue: SelectedItem|Array<SelectedItem>
+    modelValue: Item|Array<Item>
     filterable: boolean,
     multiple: boolean,
     keyValue: string,
@@ -13,24 +18,19 @@ interface Props {
     errorMessage: string
 }
 
-interface SelectedItem {
-    key: string|number,
-    value: string|number
-}
-
 const props = withDefaults(defineProps<Props>(), {
     multiple: false,
     filterable: false,
     placeholder: 'Selected Items...'
 });
 const emit = defineEmits<{
-    (e: 'update:modelValue', value: SelectedItem|Array<SelectedItem>)
+    (e: 'update:modelValue', value: Item|Array<Item>): void
 }>()
 
 const search = ref<string>('');
 const selectItems = reactive([]);
-const selectedItem = ref<SelectedItem>(null);
-const selectedItems = reactive<Array<SelectedItem>>([]);
+const selectedItem = ref<Item>(null);
+const selectedItems = reactive<Array<Item>>([]);
 const selectPosition = ref<number>(-1);
 const showItems = ref<boolean>(false);
 
@@ -45,14 +45,6 @@ const filteredItems = computed(() => {
     return selectItems.filter((item) => {
         return item.value.toLowerCase().indexOf(search.value.toLowerCase()) >= 0;
     });
-});
-
-const hasSelectedItem = computed(() => {
-    if (props.multiple) {
-        return selectedItems.length > 0;
-    }
-
-    return selectedItem.value !== null;
 });
 
 function selectItem($event: KeyboardEvent) {
@@ -84,17 +76,16 @@ function selectItem($event: KeyboardEvent) {
     }
 }
 
-function chooseItem(item = null) {
-    let selected: SelectedItem = item;
+function chooseItem(item: Item) {
 
     if (props.multiple) {
-        const itemExists = selectedItems.findIndex(i => i.key === item.key);
+        const itemKey = selectedItems.findIndex(i => i.key === item.key);
 
-        if (itemExists === -1) {
-            selectedItems.push(selected);
+        if (itemKey === -1) {
+            selectedItems.push(item);
         }
     } else {
-        selectedItem.value = selected;
+        selectedItem.value = item;
     }
 
     selectPosition.value = -1;
@@ -136,7 +127,7 @@ function activate() {
     showItems.value = true;
 }
 
-function removeItem(item: SelectedItem) {
+function removeItem(item: Item) {
     const itemIndex = selectedItems.findIndex(i => i.key === item.key);
     selectedItems.splice(itemIndex, 1);
 }
