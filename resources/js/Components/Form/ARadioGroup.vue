@@ -1,3 +1,30 @@
+<script setup lang="ts">
+import { computed, defineProps, defineEmits } from "vue";
+
+interface RadioOption {
+    value: string,
+    label: string
+}
+interface Props {
+    label: string,
+    name: string,
+    options: Array<RadioOption>,
+    modelValue: string
+}
+
+const props = defineProps<Props>();
+const emit = defineEmits<{
+    (e: 'update:modelValue', value: string|number): void
+}>();
+const value = computed({
+    set(value: string) {
+        emit('update:modelValue', value);
+    },
+    get() {
+        return props.modelValue;
+    }
+});
+</script>
 <template>
     <div class="flex flex-wrap flex-col mb-2">
         <label class="block text-sm font-bold font-cairo">{{ label }}</label>
@@ -8,37 +35,3 @@
         </div>
     </div>
 </template>
-
-<script>
-import { computed } from 'vue';
-export default {
-    props: {
-        label: {
-            type: String,
-        },
-        name: {
-            type: String,
-            required: true,
-        },
-        options: {
-            type: Array,
-            required: true
-        },
-        modelValue: {
-            type: String
-        }
-    },
-    emits: ['update:modelValue'],
-    setup(props, { emit }) {
-        const value = computed({
-            set(value) {
-                emit('update:modelValue', value);
-            },
-            get() {
-                return props.modelValue;
-            }
-        });
-        return { value };
-    },
-}
-</script>
