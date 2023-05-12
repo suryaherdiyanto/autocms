@@ -134,7 +134,7 @@
                                 </a-row>
                                 <a-row>
                                     <div class="w-full px-2">
-                                        <a-select v-model="form.selected" label="Example Select" :items="form.selectItems" filterable></a-select>
+                                        <a-select v-model="form.selected" label="Example Select" :items="form.selectItems" filterable multiple></a-select>
                                     </div>
                                 </a-row>
                                 <a-row>

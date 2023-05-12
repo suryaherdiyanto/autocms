@@ -1,3 +1,43 @@
+<script setup lang="ts">
+import { defineProps, defineEmits, withDefaults, computed } from "vue";
+
+interface CheckboxOption {
+    value: string,
+    label: string
+}
+
+interface Props {
+    label: string,
+    name: string,
+    options: Array<CheckboxOption>,
+    modelValue: Array<string|number>
+}
+const props = withDefaults(defineProps<Props>(), {
+    modelValue: () => []
+});
+const emit = defineEmits<{
+    (e: 'update:modelValue', value: Array<string|number>): void
+}>();
+const options = computed(() => {
+    return props.options;
+});
+const value = computed(() => {
+    return props.modelValue;
+});
+
+function onInputChange($event: Event) {
+    const target = $event.target as HTMLInputElement;
+
+    if (target.checked) {
+        props.modelValue.push(target.value);
+    } else {
+        const removeIndex = props.modelValue.indexOf(target.value);
+        props.modelValue.splice(removeIndex, 1);
+    }
+    emit('update:modelValue', props.modelValue);
+}
+</script>
+
 <template>
     <div class="flex flex-wrap flex-col mb-2">
         <label class="block text-sm font-bold font-cairo">{{ label }}</label>
@@ -8,45 +48,3 @@
         </div>
     </div>
 </template>
-
-<script>
-import { computed } from 'vue';
-export default {
-    props: {
-        label: {
-            type: String,
-        },
-        name: {
-            type: String,
-            required: true,
-        },
-        options: {
-            type: Array,
-            required: true
-        },
-        modelValue: {
-            type: Array
-        }
-    },
-    emits: ['update:modelValue'],
-    setup(props, { emit }) {
-        const value = computed({
-            get() {
-                return props.modelValue;
-            }
-        });
-        function onInputChange($event) {
-
-            if ($event.target.checked) {
-                props.modelValue.push($event.target.value);
-            } else {
-                const removeIndex = props.modelValue.indexOf($event.target.value);
-                props.modelValue.splice(removeIndex, 1);
-            }
-
-            emit('update:modelValue', props.modelValue);
-        }
-        return { value, onInputChange };
-    },
-}
-</script>

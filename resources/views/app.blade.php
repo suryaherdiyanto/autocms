@@ -13,6 +13,6 @@
   </head>
   <body class="font-body bg-gray-200">
     @inertia
-    @vite('resources/js/app.js')
+    @vite('resources/js/app.ts')
   </body>
 </html>
