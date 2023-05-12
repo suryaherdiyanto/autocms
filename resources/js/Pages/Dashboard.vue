@@ -98,55 +98,65 @@
                     </div>
                 </a-row>
                 <a-row>
-                    <div class="w-full lg:px-2">
+                    <div class="w-full lg:px-2 lg:pb-2">
                         <a-panel title="Example Form">
                             <template v-slot:content>
-                                <div class="flex flex-wrap -mx-2 py-2">
+                                <a-row>
                                     <div class="w-full lg:w-1/2 px-2">
                                         <a-input v-model="form.firstName" error-message="this value was invalid" placeholder="The First Name" label="First Name"></a-input>
                                     </div>
                                     <div class="w-full lg:w-1/2 px-2">
                                         <a-input v-model="form.lastName" placeholder="The Last Name" label="Last Name"></a-input>
                                     </div>
-                                </div>
-                                <div class="flex flex-wrap -mx-2 py-2">
+                                </a-row>
+                                <a-row>
                                     <div class="w-full lg:w-1/2 px-2">
                                         <a-input v-model="form.password" label="Password" type="password"></a-input>
                                     </div>
                                     <div class="w-full lg:w-1/2 px-2">
                                         <a-input v-model="form.passwordConfirmation" label="Password Confirmation" type="password"></a-input>
                                     </div>
-                                </div>
-                                <div class="flex flex-wrap -mx-2 py-2">
+                                </a-row>
+                                <a-row>
                                     <div class="w-full px-2">
                                         <a-radio-group v-model="form.option" label="Please select an option" :options="form.radioOptions" name="radio example"></a-radio-group>
                                     </div>
-                                </div>
-                                <div class="flex flex-wrap -mx-2 py-2">
+                                </a-row>
+                                <a-row>
                                     <div class="w-full px-2">
                                         <a-checkbox v-model="form.isConfirmed" name="confirmation" label="Confirmed?"></a-checkbox>
                                     </div>
-                                </div>
-                                <div class="flex flex-wrap -mx-2 py-2">
+                                </a-row>
+                                <a-row>
                                     <div class="w-full px-2">
                                         <a-checkbox-group v-model="form.hobbies" label="Please select your hobbies" :options="form.hobbyOptions" name="Check Multiple Example"></a-checkbox-group>
                                     </div>
-                                </div>
-                                <div class="flex flex-wrap -mx-2 py-2">
+                                </a-row>
+                                <a-row>
                                     <div class="w-full px-2">
-                                        <a-select v-model="form.selected" label="Example Select" :items="form.selectItems" filterable></a-select>
+                                        <a-select v-model="form.selected" label="Example Select" :items="form.selectItems" filterable multiple></a-select>
                                     </div>
-                                </div>
-                                <div class="flex flex-wrap -mx-2 py-2">
+                                </a-row>
+                                <a-row>
                                     <div class="w-full px-2">
                                         <a-textarea v-model="form.address" label="Address" name="address"></a-textarea>
                                     </div>
-                                </div>
-                                <div class="flex flex-wrap -mx-2 py-2">
+                                </a-row>
+                                <a-row>
                                     <div class="w-full px-2">
                                         <a-editor v-model="form.editor" label="Example editor" name="content" />
                                     </div>
-                                </div>
+                                </a-row>
+                            </template>
+                        </a-panel>
+                    </div>
+                    <div class="w-full lg:px-2">
+                        <a-panel title="Example Alert">
+                            <template v-slot:content>
+                                <a-alert title="Hello World" message="Alert Content" />
+                                <a-alert title="Hello World" message="Alert Content" type="warning" />
+                                <a-alert title="Hello World" message="Alert Content" type="info" />
+                                <a-alert title="Hello World" message="Alert Content" type="danger" />
                             </template>
                         </a-panel>
                     </div>

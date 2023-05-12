@@ -1,3 +1,30 @@
+<script setup lang="ts">
+import { computed, defineProps, withDefaults, defineEmits } from "vue";
+
+interface Props {
+    name: string,
+    label: string,
+    placeholder: string,
+    modelValue: string,
+    errorMessage: string
+}
+
+const props = withDefaults(defineProps<Props>(), {
+    errorMessage: null
+});
+const emit = defineEmits<{(e: 'update:modelValue', value: string): void}>();
+
+const value = computed({
+    set(value: string) {
+        emit('update:modelValue', value);
+    },
+    get() {
+        return props.modelValue;
+    }
+});
+
+</script>
+
 <template>
     <div class="block mb-2">
         <label :for="name" class="text-sm font-bold font-cairo">{{ label }}</label>
@@ -5,40 +32,3 @@
         <span v-if="errorMessage" class="text-sm text-red-400 font-semibold">{{ errorMessage }}</span>
     </div>
 </template>
-
-<script>
-import { computed } from 'vue'
-export default {
-    props: {
-        name: {
-            type: String
-        },
-        label: {
-            type: String
-        },
-        placeholder: {
-            type: String
-        },
-        modelValue: {
-            type: String
-        },
-        errorMessage: {
-            type: String,
-            default: null
-        }
-    },
-    emits: ['update:modelValue'],
-    setup(props, { emit }) {
-        const value = computed({
-            set(value) {
-                emit('update:modelValue', value);
-            },
-            get() {
-                return props.modelValue;
-            }
-        });
-
-        return { value };
-    },
-}
-</script>

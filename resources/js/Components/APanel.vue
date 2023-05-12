@@ -1,5 +1,21 @@
+<script setup lang="ts">
+import { defineProps, withDefaults } from "vue";
+import ABox from '@/Components/ABox.vue';
+
+interface Panel {
+    title: string,
+    hasFooter: boolean
+}
+
+withDefaults(defineProps<Panel>(), {
+    hasFooter: false
+});
+
+</script>
+
+
 <template>
-    <a-box is-panel>
+    <ABox isPanel>
         <div class="w-full bg-gray-100 py-4 px-5 rounded-t-lg">
             <h3 class="font-cairo text-lg font-bold text-gray-800">{{ title }}</h3>
         </div>
@@ -9,27 +25,5 @@
         <div v-if="hasFooter" class="py-4 px-5 w-full bg-gray-100 rounded-b-lg">
             <slot name="footer"></slot>
         </div>
-    </a-box>
+    </ABox>
 </template>
-
-<script>
-import ABox from './ABox.vue';
-
-export default {
-    components: {
-        ABox
-    },
-    props: {
-        title: {
-            type: String
-        },
-        hasFooter: {
-            type: Boolean,
-            default: false
-        }
-    },
-    setup() {
-
-    },
-}
-</script>
