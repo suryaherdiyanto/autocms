@@ -15,16 +15,22 @@ function closed() {
     isClosed.value = true;
 }
 
+function show() {
+    isClosed.value = false;
+}
+
 onMounted(() => {
+    show();
+
     setTimeout(() => {
-        isClosed.value = false;
-    }, 300)
+        closed();
+    }, 5000)
 })
 </script>
 <template>
     <div>
         <transition name="slide">
-            <div v-if="!isClosed" class="a-notification w-72 px-4 py-2 bg-white border border-gray-200 rounded absolute top-5 right-5 z-50">
+            <div v-if="!isClosed" class="a-notification w-72 px-4 py-2 bg-white border border-gray-200 rounded fixed top-5 right-5 z-50">
                 <h4 class="font-cairo text-gray-800 font-bold">{{ props.title }} <span class="text-sm text-gray-400 cursor-pointer float-right"><i @click="closed" class="fa-regular fa-circle-xmark"></i></span></h4>
                 <p class="text-gray-800 text-sm">{{ props.message }}</p>
             </div>

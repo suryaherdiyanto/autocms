@@ -150,13 +150,20 @@
                             </template>
                         </a-panel>
                     </div>
-                    <div class="w-full lg:px-2">
+                    <div class="w-full lg:w-1/2 lg:px-2 mb-2">
                         <a-panel title="Example Alert">
                             <template v-slot:content>
                                 <a-alert title="Hello World" message="Alert Content" />
                                 <a-alert title="Hello World" message="Alert Content" type="warning" />
                                 <a-alert title="Hello World" message="Alert Content" type="info" />
                                 <a-alert title="Hello World" message="Alert Content" type="danger" />
+                            </template>
+                        </a-panel>
+                    </div>
+                    <div class="w-full lg:w-1/2 lg:px-2 mb-2">
+                        <a-panel title="Notification">
+                            <template v-slot:content>
+                                <a-button @click="showNotif">Show Notification</a-button>
                             </template>
                         </a-panel>
                     </div>
@@ -217,7 +224,10 @@ export default {
             ]
         });
         const notification = inject('anotification');
-        notification.show({message: 'Hello world'});
+
+        function showNotif() {
+            notification.show({message: 'Hello world'});
+        }
 
         onMounted(() => {
             setTimeout(() => {
@@ -236,7 +246,7 @@ export default {
             }, 1000);
         })
 
-        return { items, isLoading, form }
+        return { items, isLoading, form, showNotif }
     },
 }
 </script>
