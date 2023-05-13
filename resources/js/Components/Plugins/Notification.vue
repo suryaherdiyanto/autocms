@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, withDefaults, computed, ref, reactive, onMounted } from "vue";
+import { defineProps, withDefaults, ref, reactive, onMounted, defineEmits } from "vue";
 
 interface NotificationProps {
     title?: string,
@@ -16,14 +16,19 @@ const style = reactive({
     'top': props.offset+'px'
 });
 
+const emit = defineEmits<{
+    (e: 'onClosed'): void
+}>()
 
 function closed() {
     isClosed.value = true;
+    emit('onClosed');
 }
 
 function show() {
     isClosed.value = false;
 }
+
 onMounted(() => {
     show();
 

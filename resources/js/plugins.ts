@@ -5,15 +5,14 @@ import { NotificationProps } from "@/Components/Plugins/notification";
 export const Notification = {
     install(app: App) {
         const $notify = {
-            notificationCount: 0,
             show(options: NotificationProps) {
 
                 let template = h(NotificationTemplate, options);
+                const notifyDOM = document.querySelectorAll<HTMLElement>('.a-notification');
 
-                if (this.notificationCount > 0) {
-                    const notifDOM = document.querySelector('.a-notification') as HTMLElement;
+                if (notifyDOM.length > 0) {
 
-                    template.props.offset = (this.notificationCount * notifDOM.offsetHeight) + (16 * (this.notificationCount+1));
+                    template.props.offset = (notifyDOM.length * notifyDOM[0].offsetHeight) + (16 * (notifyDOM.length+1));
                 }
 
                 const container = document.body as HTMLTemplateElement;
