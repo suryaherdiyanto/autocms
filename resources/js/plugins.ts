@@ -1,5 +1,5 @@
 import { App } from "vue";
-import { notify } from "./Components/Plugins/notification";
+import { notify } from "@/Components/Plugins/notification";
 
 export const Notification = {
     install(app: App) {
