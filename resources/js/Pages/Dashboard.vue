@@ -168,7 +168,7 @@
 </template>
 
 <script>
-import { reactive, onMounted, ref } from 'vue';
+import { reactive, onMounted, ref, inject } from 'vue';
 import TheHeader from "../Templates/TheHeader.vue";
 import TheSidebar from '../Templates/TheSidebar.vue';
 
@@ -216,6 +216,9 @@ export default {
                 }
             ]
         });
+        const notification = inject('anotification');
+        notification.show({message: 'Hello world'});
+
         onMounted(() => {
             setTimeout(() => {
                 items.push(...[{

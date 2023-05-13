@@ -15,6 +15,9 @@ import ASelect from '@/Components/Form/ASelect.vue';
 import AEditor from '@/Components/Form/AEditor.vue';
 import ARow from '@/Components/ARow.vue';
 import AAlert from '@/Components/AAlert.vue';
+import ANotification from '@/Components/Plugins/Notification.vue';
+
+import { Notification } from "@/plugins";
 
 createInertiaApp({
     id: 'app',
@@ -24,6 +27,7 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
       createApp({ render: () => h(App, props) })
         .use(plugin)
+        .use(Notification)
         .component('AButton', AButton)
         .component('ABox', ABox)
         .component('APanel', APanel)
@@ -37,6 +41,7 @@ createInertiaApp({
         .component('AEditor', AEditor)
         .component('ARow', ARow)
         .component('AAlert', AAlert)
+        .component('ANotification', ANotification)
         .mount(el)
     },
   })
