@@ -22,6 +22,13 @@ const emit = defineEmits<{
 
 function closed() {
     isClosed.value = true;
+
+    const notificationDOM = document.querySelectorAll<HTMLElement>('.a-notification');
+
+    notificationDOM.forEach((element: HTMLElement, key: number) => {
+        element.style.top = (key * element.offsetHeight) + ((key+1) * 16)+'px';
+    })
+
     emit('onClosed');
 }
 
@@ -49,9 +56,14 @@ onMounted(() => {
 </template>
 
 <style>
+.a-notification {
+    transition: top 0.2s;
+}
+
 .slide-enter-active,
 .slide-leave-active {
     transition: all 0.35s ease;
+    transition-delay: 0.2s;
 }
 
 .slide-enter-from,
