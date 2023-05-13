@@ -23,11 +23,15 @@ const emit = defineEmits<{
 function closed() {
     isClosed.value = true;
 
-    const notificationDOM = document.querySelectorAll<HTMLElement>('.a-notification');
+    setTimeout(() => {
+        const notificationDOM = document.querySelectorAll<HTMLElement>('.a-notification');
 
-    notificationDOM.forEach((element: HTMLElement, key: number) => {
-        element.style.top = (key * element.offsetHeight) + ((key+1) * 16)+'px';
-    })
+        if (notificationDOM.length > 0) {
+            notificationDOM.forEach((element: HTMLElement, key: number) => {
+                element.style.top = (key * element.offsetHeight) + ((key+1) * 16)+'px';
+            })
+        }
+    }, 500);
 
     emit('onClosed');
 }
@@ -57,13 +61,13 @@ onMounted(() => {
 
 <style>
 .a-notification {
-    transition: top 0.2s;
+    transition: all 0.3s;
 }
 
 .slide-enter-active,
 .slide-leave-active {
-    transition: all 0.35s ease;
-    transition-delay: 0.2s;
+    transition-delay: 0.15s;
+    transition-duration: 0.25s;
 }
 
 .slide-enter-from,
