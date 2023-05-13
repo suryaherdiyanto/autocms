@@ -1,4 +1,5 @@
 export interface NotificationProps {
     title?: string,
-    message: string
+    message: string,
+    offset?: number
 }
