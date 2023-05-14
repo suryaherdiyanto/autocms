@@ -57,7 +57,7 @@ onMounted(() => {
                 <h4 class="font-cairo text-gray-800 font-bold">{{ props.title }} <span class="text-sm text-gray-400 cursor-pointer float-right"><i @click="closed" class="fa-regular fa-circle-xmark"></i></span></h4>
                 <p class="text-gray-800 text-sm">{{ props.message }}</p>
                 <div class="flex justify-end mt-2">
-                    <a-button v-if="props.showCancelButton" @click="canceled">{{ props.cancelText }}</a-button>
+                    <a-button v-if="props.showCancelButton" @click="canceled" type="light">{{ props.cancelText }}</a-button>
                     <a-button @click="confirmed" class="ml-2">{{ props.okText }}</a-button>
                 </div>
             </div>
