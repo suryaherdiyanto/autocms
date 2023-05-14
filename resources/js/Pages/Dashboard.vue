@@ -170,6 +170,7 @@
                 </a-row>
             </div>
         </div>
+        <MessageBox message="You message has arrived!" />
     </div>
 
 </template>

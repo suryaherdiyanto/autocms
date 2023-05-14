@@ -16,6 +16,8 @@ import AEditor from '@/Components/Form/AEditor.vue';
 import ARow from '@/Components/ARow.vue';
 import AAlert from '@/Components/AAlert.vue';
 
+import MessageBox from "@/Components/Plugins/MessageBox/MessageBox.vue";
+
 import { Notification } from "@/plugins";
 
 createInertiaApp({
@@ -40,6 +42,7 @@ createInertiaApp({
         .component('AEditor', AEditor)
         .component('ARow', ARow)
         .component('AAlert', AAlert)
+        .component('MessageBox', MessageBox)
         .mount(el)
     },
   })

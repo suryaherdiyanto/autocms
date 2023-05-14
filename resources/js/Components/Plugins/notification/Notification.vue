@@ -59,7 +59,7 @@ onMounted(() => {
     </div>
 </template>
 
-<style>
+<style scoped>
 .a-notification {
     transition: all 0.3s;
 }
