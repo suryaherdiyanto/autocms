@@ -16,9 +16,7 @@ import AEditor from '@/Components/Form/AEditor.vue';
 import ARow from '@/Components/ARow.vue';
 import AAlert from '@/Components/AAlert.vue';
 
-import MessageBox from "@/Components/Plugins/MessageBox/MessageBox.vue";
-
-import { Notification } from "@/plugins";
+import { Notification, MessageBox } from "@/plugins";
 
 createInertiaApp({
     id: 'app',
@@ -29,6 +27,7 @@ createInertiaApp({
       createApp({ render: () => h(App, props) })
         .use(plugin)
         .use(Notification)
+        .use(MessageBox)
         .component('AButton', AButton)
         .component('ABox', ABox)
         .component('APanel', APanel)

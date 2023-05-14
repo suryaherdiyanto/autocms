@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import AButton from "@/Components/AButton.vue";
-import { defineProps, withDefaults, ref, onMounted } from "vue";
+import { defineProps, defineEmits, withDefaults, ref, onMounted } from "vue";
 
 interface MessageBoxProps {
     title?: string,
     okText?: string,
+    showCancelButton?: boolean,
+    cancelText?: string,
     message: string
 }
 
@@ -12,11 +14,31 @@ const isClosed = ref(true);
 
 const props = withDefaults(defineProps<MessageBoxProps>(), {
     title: "Alert",
-    okText: "OK"
+    okText: "OK",
+    showCancelButton: false,
+    cancelText: "Cancel"
 });
+
+const emit = defineEmits<{
+    (e: 'closed'): void,
+    (e: 'confirmed'): void,
+    (e: 'canceled'): void
+}>();
 
 function closed() {
     isClosed.value = true;
+
+    emit('closed');
+}
+
+function confirmed() {
+    closed();
+    emit('confirmed');
+}
+
+function canceled() {
+    closed();
+    emit('canceled');
 }
 
 function show() {
@@ -24,20 +46,19 @@ function show() {
 }
 
 onMounted(() => {
-    setTimeout(() => {
-        show();
-    }, 2000)
+    show();
 })
 </script>
 
 <template>
     <transition name="slide-fade">
-        <div v-if="!isClosed" class="w-full h-screen fixed bg-gray-800/40 bd">
+        <div v-if="!isClosed" class="w-full top-0 left-0 h-screen fixed bg-gray-800/40 bd z-50">
             <div class="flex relative flex-col w-80 p-3 bg-white border border-gray-200 rounded inset-0 mx-auto mt-[20%] z-50 message-box">
                 <h4 class="font-cairo text-gray-800 font-bold">{{ props.title }} <span class="text-sm text-gray-400 cursor-pointer float-right"><i @click="closed" class="fa-regular fa-circle-xmark"></i></span></h4>
                 <p class="text-gray-800 text-sm">{{ props.message }}</p>
                 <div class="flex justify-end mt-2">
-                    <a-button>{{ props.okText }}</a-button>
+                    <a-button v-if="props.showCancelButton" @click="canceled">{{ props.cancelText }}</a-button>
+                    <a-button @click="confirmed" class="ml-2">{{ props.okText }}</a-button>
                 </div>
             </div>
         </div>

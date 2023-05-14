@@ -163,14 +163,14 @@
                     <div class="w-full lg:w-1/2 lg:px-2 mb-2">
                         <a-panel title="Notification">
                             <template v-slot:content>
-                                <a-button @click="showNotif">Show Notification</a-button>
+                                <a-button @click="showNotif" class="mr-2">Show Notification</a-button>
+                                <a-button @click="showMessageBox">Show Message Box</a-button>
                             </template>
                         </a-panel>
                     </div>
                 </a-row>
             </div>
         </div>
-        <MessageBox message="You message has arrived!" />
     </div>
 
 </template>
@@ -225,9 +225,16 @@ export default {
             ]
         });
         const notification = inject('anotification');
+        const messageBox = inject('amessage-box');
 
         function showNotif() {
             notification.show({message: 'Hello world'});
+        }
+
+        function showMessageBox() {
+            messageBox.show({message: 'This is a message box', showCancelButton: true, onConfirmed: () => {
+                console.log('confirmed!');
+            }});
         }
 
         onMounted(() => {
@@ -247,7 +254,7 @@ export default {
             }, 1000);
         })
 
-        return { items, isLoading, form, showNotif }
+        return { items, isLoading, form, showNotif, showMessageBox }
     },
 }
 </script>

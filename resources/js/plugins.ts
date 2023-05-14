@@ -1,5 +1,6 @@
 import { App } from "vue";
 import { notify } from "@/Components/Plugins/notification";
+import { showMessageBox } from "@/Components/Plugins/MessageBox";
 
 export const Notification = {
     install(app: App) {
@@ -8,5 +9,15 @@ export const Notification = {
         }
 
         app.provide('anotification', $notify);
+    }
+}
+
+export const MessageBox = {
+    install(app: App) {
+        const $messageBox = {
+            show: showMessageBox
+        }
+
+        app.provide('amessage-box', $messageBox);
     }
 }
