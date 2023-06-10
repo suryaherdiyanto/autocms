@@ -19,4 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('pages', PageController::class);
+Route::middleware('auth:sanctum')->group(function() {
+
+    Route::resource('pages', PageController::class);
+});

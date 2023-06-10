@@ -5,7 +5,8 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use App\Models\Page;
+use App\Models\{Page, User};
+use Laravel\Sanctum\Sanctum;
 
 class PageApiTest extends TestCase
 {
@@ -19,6 +20,7 @@ class PageApiTest extends TestCase
     public function fetch_page_data()
     {
         Page::factory()->count(20)->create();
+        Sanctum::actingAs(User::factory()->create(), ['*']);
 
         $response = $this->getJson('api/pages');
 
