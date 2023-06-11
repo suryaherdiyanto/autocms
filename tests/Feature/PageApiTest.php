@@ -17,7 +17,7 @@ class PageApiTest extends TestCase
      * @test
      * @return void
      */
-    public function fetch_page_data()
+    public function user_can_fetch_page_data()
     {
         Page::factory()->count(20)->create();
         Sanctum::actingAs(User::factory()->create(), ['*']);
@@ -49,7 +49,7 @@ class PageApiTest extends TestCase
      * @test
      * @return void
      */
-    public function insert_page_data()
+    public function user_can_insert_page_data()
     {
         Sanctum::actingAs(User::factory()->create(), ['*']);
         $response = $this->postJson('api/pages', [
@@ -73,4 +73,54 @@ class PageApiTest extends TestCase
         ]);
     }
 
+    /**
+     * Update page data
+     *
+     * @test
+     * @return void
+     */
+    public function user_can_update_page_data()
+    {
+        Sanctum::actingAs(User::factory()->create(), ['*']);
+        $page = Page::factory()->create();
+
+        $response = $this->putJson('api/pages/'.$page->id, [
+            'title' => 'Another title',
+            'is_published' => true,
+            'meta_title' => 'the meta title',
+            'meta_description' => 'the meta description'
+        ]);
+
+        $response->assertStatus(200)
+                ->assertJson([ 'message' => 'Page successfully updated!' ]);
+
+        $this->assertDatabaseHas('pages', [
+            'title' => 'Another title',
+            'is_published' => true,
+            'meta_title' => 'the meta title',
+            'meta_description' => 'the meta description'
+        ]);
+    }
+
+    /**
+     * Delete page data
+     *
+     * @test
+     * @return void
+     */
+    public function user_can_delete_page_data()
+    {
+        Sanctum::actingAs(User::factory()->create(), ['*']);
+        $page = Page::factory()->create();
+
+        $response = $this->deleteJson('api/pages/'.$page->id);
+
+        $response->assertStatus(200)
+                ->assertJson([ 'message' => 'Page successfully deleted!' ]);
+
+        $this->assertDatabaseMissing('pages', [
+            'title' => $page->title,
+            'id' => $page->id,
+        ]);
+    }
 }

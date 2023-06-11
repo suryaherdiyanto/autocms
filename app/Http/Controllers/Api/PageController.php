@@ -78,7 +78,10 @@ class PageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $page = Page::findOrFail($id);
+        $page->update($request->all());
+
+        return response()->json(['status' => 'success', 'message' => 'Page successfully updated!']);
     }
 
     /**
@@ -89,6 +92,10 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $page = Page::findOrFail($id);
+        $page->delete();
+
+
+        return response()->json(['status' => 'success', 'message' => 'Page successfully deleted!']);
     }
 }
