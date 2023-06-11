@@ -39,7 +39,12 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Page::create($request->only(['title', 'slug', 'content', 'is_published', 'meta_title', 'meta_description']));
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Page successfully created!'
+        ], 201);
     }
 
     /**
