@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Resources\PageResource;
 use App\Models\Page;
 use App\Http\Requests\{StorePageRequest, UpdatePageRequest};
+use App\Services\PageService;
+use App\DataTransferObjects\PageData;
 
 class PageController extends Controller
 {
@@ -15,9 +17,9 @@ class PageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $pages = Page::paginate(10);
+        $pages = (new PageService)->index($request, new Page());
 
         return PageResource::collection($pages);
     }
@@ -40,7 +42,7 @@ class PageController extends Controller
      */
     public function store(StorePageRequest $request)
     {
-        Page::create($request->safe()->only(['title', 'slug', 'content', 'is_published', 'meta_title', 'meta_description']));
+        (new PageService)->createPage(PageData::fromRequest($request->validated()), new Page());
 
         return response()->json([
             'status' => 'success',
@@ -79,8 +81,7 @@ class PageController extends Controller
      */
     public function update(UpdatePageRequest $request, $id)
     {
-        $page = Page::findOrFail($id);
-        $page->update($request->safe()->all());
+        (new PageService)->updatePage(PageData::fromRequest($request->safe()->all()), $id);
 
         return response()->json(['status' => 'success', 'message' => 'Page successfully updated!']);
     }
@@ -93,10 +94,7 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
-        $page = Page::findOrFail($id);
-        $page->delete();
-
-
+        (new PageService)->deletePage($id);
         return response()->json(['status' => 'success', 'message' => 'Page successfully deleted!']);
     }
 }

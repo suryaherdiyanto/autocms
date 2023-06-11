@@ -44,6 +44,27 @@ class PageApiTest extends TestCase
     }
 
     /**
+     * Fetch a page index data with filtered fields.
+     *
+     * @test
+     * @return void
+     */
+    public function user_can_fetch_page_data_filtered_fields()
+    {
+        Page::factory()->count(20)->create();
+        Sanctum::actingAs(User::factory()->create(), ['*']);
+
+        $response = $this->getJson('api/pages?fields=title,slug');
+
+        $response->assertStatus(200)
+                ->assertJsonCount(10, 'data')
+                ->assertJsonPath('meta.per_page', 10)
+                ->assertJsonPath('meta.total', 20);
+        $this->assertTrue(!isset($response['data'][0]['id']));
+        $this->assertTrue(!isset($response['data'][0]['content']));
+    }
+
+    /**
      * Insert page data
      *
      * @test
@@ -122,5 +143,28 @@ class PageApiTest extends TestCase
             'title' => $page->title,
             'id' => $page->id,
         ]);
+    }
+
+    /**
+     * Test if the user cannot insert the data if invalid input
+     *
+     * @test
+     * @return void
+     */
+    public function user_cannot_insert_page_data_if_invalid_input()
+    {
+        Sanctum::actingAs(User::factory()->create(), ['*']);
+        $page = [
+            'title' => '',
+            'slug' => 'the-slug',
+            'content' => ''
+        ];
+
+        $response = $this->postJson('api/pages/', $page);
+
+        $response->assertStatus(422)
+                ->assertJsonValidationErrorFor('title')
+                ->assertJsonValidationErrorFor('is_published');
+
     }
 }
