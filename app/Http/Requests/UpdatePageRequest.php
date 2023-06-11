@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePageRequest extends FormRequest
+class UpdatePageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class StorePageRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:100',
-            'slug' => 'required|unique:pages|string|max:100',
+            'slug' => 'nullable|unique:pages|string|max:100',
             'content' => 'nullable|string',
             'is_published' => 'required|boolean',
             'meta_title' => 'nullable|string|max:100',

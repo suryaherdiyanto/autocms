@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Resources\PageResource;
 use App\Models\Page;
+use App\Http\Requests\{StorePageRequest, UpdatePageRequest};
 
 class PageController extends Controller
 {
@@ -37,9 +38,9 @@ class PageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePageRequest $request)
     {
-        Page::create($request->only(['title', 'slug', 'content', 'is_published', 'meta_title', 'meta_description']));
+        Page::create($request->safe()->only(['title', 'slug', 'content', 'is_published', 'meta_title', 'meta_description']));
 
         return response()->json([
             'status' => 'success',
@@ -76,10 +77,10 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePageRequest $request, $id)
     {
         $page = Page::findOrFail($id);
-        $page->update($request->all());
+        $page->update($request->safe()->all());
 
         return response()->json(['status' => 'success', 'message' => 'Page successfully updated!']);
     }
