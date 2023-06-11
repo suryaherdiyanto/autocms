@@ -9,6 +9,7 @@ RUN apk update && apk upgrade && \
     php81-tokenizer \
     php81-pdo_mysql \
     php81-pdo_pgsql \
+    php81-pdo_sqlite \
     php81-exif \
     php81-redis \
     php81-zip \
