@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: ['8.0', 8.1, 8.2]
+        php: [8.1, 8.2]
 
     name: PHP ${{ matrix.php }}
 
@@ -34,6 +34,11 @@ jobs:
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite
           coverage: none
 
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.16.0'
+
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-interaction --no-progress
 
@@ -42,6 +47,12 @@ jobs:
 
       - name: Generate app key
         run: php artisan key:generate
+
+      - name: NPM Install
+        run: npm install
+
+      - name: Building Assets
+        run: npm run build
 
       - name: Execute tests
         run: vendor/bin/phpunit
