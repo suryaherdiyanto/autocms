@@ -27,4 +27,18 @@ class DashboardPageTest extends TestCase
                     $page->component('Dashboard');
                 });
     }
+
+    /**
+     * Test user cannot access dashboard page if not authenticated
+     *
+     * @return void
+     */
+    public function test_user_cannot_access_dashboard_if_not_authenticated()
+    {
+        $response = $this->get('/admin/dashboard');
+
+        $response->assertStatus(302)
+                ->assertRedirect('/admin/login');
+
+    }
 }
