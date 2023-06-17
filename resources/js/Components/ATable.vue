@@ -2,8 +2,6 @@
 import TableLoading from './Table/TableLoading.vue';
 import { computed, defineProps, withDefaults } from 'vue';
 
-
-
 interface Table {
     items: Array<object>,
     headings: Array<string>,
