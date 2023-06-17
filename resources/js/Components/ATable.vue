@@ -37,27 +37,33 @@ function uppercaseWord(text: string) {
 </script>
 
 <template>
-    <div :class="styles" class="relative">
-        <Transition name="fadeOut">
-            <TableLoading v-if="isLoading" />
-        </Transition>
+<div :class="styles" class="flex flex-col relative">
+  <div class="-m-1.5 overflow-x-auto">
+    <div class="p-1.5 min-w-full inline-block align-middle">
+    <Transition name="fadeOut">
+        <TableLoading v-if="isLoading" />
+    </Transition>
+      <div class="overflow-hidden">
         <Transition name="fadeIn">
-            <table v-show="!isLoading" :class="styles" class="w-full table-auto">
-                <thead class="text-sm font-semibold border-y border-y-gray-200">
+            <table v-show="!isLoading" :class="styles" class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                <thead>
                     <tr>
-                        <td v-for="(heading,index) in tableHeadings" :key="index" class="py-2">
+                        <th scope="col" v-for="(heading,index) in tableHeadings" :key="index" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                             {{ uppercaseWord(heading) }}
-                        </td>
+                        </th>
                     </tr>
                 </thead>
                 <tbody class="text-sm">
-                    <tr v-for="(item, index) in tableData" :key="index" :class="(index%2 === 0) ? {'bg-gray-200': true}:{'bg-gray-200': false}" class="border-b border-b-gray-200">
-                        <td v-for="(heading,key) in tableHeadings" :key="key" class="py-2 px-1">{{ item[heading] }}</td>
+                    <tr v-for="(item, index) in tableData" :key="index"  class="odd:bg-white even:bg-gray-100">
+                        <td v-for="(heading,key) in tableHeadings" :key="key" class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">{{ item[heading] }}</td>
                     </tr>
                 </tbody>
             </table>
         </Transition>
+      </div>
     </div>
+  </div>
+</div>
 </template>
 
 <style scoped>
