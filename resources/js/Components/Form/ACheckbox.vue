@@ -21,5 +21,5 @@ const value = computed({
 });
 </script>
 <template>
-    <input v-model="value" class="inline-block rounded-sm border-gray-400 text-accent-primary focus:outline-accent-primary" :id="name" type="checkbox"> <label class="text-sm font-semibold mr-2" :for="name">{{ label }}</label>
+    <input v-model="value" class="inline-block rounded-sm border-gray-400 text-accent-primary mr-2 focus:outline-accent-primary" :id="name" type="checkbox"> <label class="text-sm font-semibold mr-2" :for="name">{{ label }}</label>
 </template>

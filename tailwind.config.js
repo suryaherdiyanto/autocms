@@ -17,6 +17,9 @@ module.exports = {
         'primary-lighter': "#39365c",
         'accent-primary': "#6418C3",
         'accent-primary-darker': "#5213a1"
+      },
+      width: {
+        '96': "24rem"
       }
     },
   },

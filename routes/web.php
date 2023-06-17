@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\{AdminController, AuthenticationController};
 
 /*
 |--------------------------------------------------------------------------
@@ -15,3 +15,6 @@ use App\Http\Controllers\AdminController;
 */
 
 Route::get('/', [AdminController::class, 'dashboard']);
+Route::prefix('admin')->group(function() {
+    Route::get('login', [AuthenticationController::class, 'loginPage']);
+});
