@@ -17,4 +17,8 @@ use App\Http\Controllers\{AdminController, AuthenticationController};
 Route::get('/', [AdminController::class, 'dashboard']);
 Route::prefix('admin')->group(function() {
     Route::get('login', [AuthenticationController::class, 'loginPage']);
+
+    Route::middleware('auth')->group(function() {
+        Route::get('dashboard', [AdminController::class, 'dashboard']);
+    });
 });

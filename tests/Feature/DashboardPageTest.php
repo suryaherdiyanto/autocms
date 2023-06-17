@@ -5,23 +5,26 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\User;
 use Inertia\Testing\AssertableInertia as Assert;
 
-class AuthenticationTest extends TestCase
+class DashboardPageTest extends TestCase
 {
     use RefreshDatabase;
     /**
-     * Test user can visit admin page.
+     * Test if authenticated user can see the dashboard page
      *
      * @return void
      */
-    public function test_user_can_visit_admin_login_page()
+    public function test_if_authenticated_user_can_see_dashboard_page()
     {
-        $response = $this->get('/admin/login');
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get('/admin/dashboard');
 
         $response->assertStatus(200)
                 ->assertInertia(function(Assert $page) {
-                    $page->component('Login');
+                    $page->component('Dashboard');
                 });
     }
 }
