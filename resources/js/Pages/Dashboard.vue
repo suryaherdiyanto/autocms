@@ -8,7 +8,7 @@
 
             <div class="p-6">
                 <div class="py-4">
-                    <h2 class="font-cairo text-2xl font-bold">Dashboard</h2>
+                    <h2 class="font-cairo text-2xl font-bold">Dashboard For The User</h2>
                     <p class="text-gray-500 text-sm">Lorem ipsum dolor.</p>
                 </div>
 
