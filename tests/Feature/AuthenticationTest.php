@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Inertia\Testing\AssertableInertia as Assert;
+use App\Models\User;
 
 class AuthenticationTest extends TestCase
 {
@@ -23,5 +24,33 @@ class AuthenticationTest extends TestCase
                 ->assertInertia(function(Assert $page) {
                     $page->component('Login');
                 });
+    }
+
+    public function test_user_can_login_with_valid_credentials()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->post('/admin/login', ['email' => $user->email, 'password' => 'password']);
+
+        $response
+            ->assertStatus(302)
+            ->assertRedirect('/admin/dashboard');
+
+        $this->assertAuthenticatedAs($user, 'web');
+    }
+
+    public function test_user_cannot_login_with_invalid_credentials()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->post('/admin/login', ['email' => $user->email, 'password' => 'abcd']);
+
+        $response
+            ->assertStatus(302)
+            ->assertRedirect('/')
+            ->assertInvalid(['email' => 'Email or password is invalid']);
+
+        $this->assertGuest();
+
     }
 }
