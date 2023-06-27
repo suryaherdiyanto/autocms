@@ -3,6 +3,7 @@ import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 
 import AButton from '@/Components/AButton.vue';
+import ASubmit from '@/Components/ASubmit.vue';
 import ABox from '@/Components/ABox.vue';
 import APanel from '@/Components/APanel.vue';
 import ATable from '@/Components/ATable.vue';
@@ -29,6 +30,7 @@ createInertiaApp({
         .use(Notification)
         .use(MessageBox)
         .component('AButton', AButton)
+        .component('ASubmit', ASubmit)
         .component('ABox', ABox)
         .component('APanel', APanel)
         .component('ATable', ATable)

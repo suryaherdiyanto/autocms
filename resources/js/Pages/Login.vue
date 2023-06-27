@@ -1,7 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { useForm } from '@inertiajs/vue3';
 
-const errorMessage = ref(null);
+const loginForm = useForm({
+    email: null,
+    password: null,
+    remember: false
+})
 </script>
 
 <template>
@@ -10,13 +14,12 @@ const errorMessage = ref(null);
             <h1 class="text-gray-800 text-xl text-center font-cairo mb-3">AutoCMS Login</h1>
             <div class="w-96">
                 <a-box>
-                    <a-alert v-show="errorMessage" :message="errorMessage" type="warning"></a-alert>
-                    <form action="#">
-                        <a-input label="Email"></a-input>
-                        <a-input label="Password" type="password"></a-input>
+                    <form @submit.prevent="loginForm.post('/admin/login')" action="#">
+                        <a-input v-model="loginForm.email" label="Email" :errorMessage="loginForm.errors.email"></a-input>
+                        <a-input v-model="loginForm.password" label="Password" type="password"></a-input>
                         <div class="flex my-2">
-                            <a-checkbox name="remember" label="Remember Me" />
-                            <a-button class="ml-auto">Login</a-button>
+                            <a-checkbox v-model="loginForm.remember" name="remember" label="Remember Me" />
+                            <a-submit class="ml-auto" :loading="loginForm.processing">Login</a-submit>
                         </div>
                     </form>
                 </a-box>
