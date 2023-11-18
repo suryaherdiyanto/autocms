@@ -23,7 +23,7 @@ const page = usePage();
             <div class="px-2 py-6 flex items-center cursor-pointer hover:bg-primary-lighter relative group">
                 <img width="32" height="32" src="../../images/blank-profile-picture.png" alt="Profile Pic" class="rounded mr-3">
                 <div class="flex flex-col mr-5">
-                    <span class="font-cairo text-white font-semibold text-sm">{{ page.props.user.name }}</span>
+                    <span class="font-cairo text-white font-semibold text-sm">{{ page.props.user?.name }}</span>
                     <span class="font-cairo text-gray-500 font-semibold text-xs">Administrator</span>
                 </div>
                 <i class="fa-solid fa-caret-down text-accent-primary"></i>
