@@ -27,8 +27,6 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
       createApp({ render: () => h(App, props) })
         .use(plugin)
-        .use(Notification)
-        .use(MessageBox)
         .component('AButton', AButton)
         .component('ASubmit', ASubmit)
         .component('ABox', ABox)
