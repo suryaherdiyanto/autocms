@@ -18,7 +18,7 @@ class AuthenticationTest extends TestCase
      */
     public function test_user_can_visit_admin_login_page()
     {
-        $response = $this->get('/admin/login');
+        $response = $this->get('/auth/login');
 
         $response->assertStatus(200)
                 ->assertInertia(function(Assert $page) {
@@ -30,11 +30,11 @@ class AuthenticationTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->post('/admin/login', ['email' => $user->email, 'password' => 'password']);
+        $response = $this->post('/auth/login', ['email' => $user->email, 'password' => 'password']);
 
         $response
             ->assertStatus(302)
-            ->assertRedirect('/admin/dashboard');
+            ->assertRedirect('/auth/dashboard');
 
         $this->assertAuthenticatedAs($user, 'web');
     }
@@ -43,7 +43,7 @@ class AuthenticationTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->post('/admin/login', ['email' => $user->email, 'password' => 'abcd']);
+        $response = $this->post('/auth/login', ['email' => $user->email, 'password' => 'abcd']);
 
         $response
             ->assertStatus(302)
@@ -59,7 +59,7 @@ class AuthenticationTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)
-                        ->post('/admin/logout');
+                        ->post('/auth/logout');
 
         $response->assertRedirect('admin/login');
 
