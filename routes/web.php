@@ -15,10 +15,10 @@ use App\Http\Controllers\{AdminController, AuthenticationController};
 */
 
 Route::get('/', [AdminController::class, 'dashboard']);
-Route::prefix('admin')->group(function() {
-    Route::get('login', [AuthenticationController::class, 'loginPage'])->name('login.page');
-    Route::post('login', [AuthenticationController::class, 'login'])->name('login');
-    Route::post('logout', [AuthenticationController::class, 'logout'])->name('logout');
+Route::prefix('auth')->group(function() {
+    Route::get('login', [AuthenticationController::class, 'loginPage'])->name('auth.login');
+    Route::post('login', [AuthenticationController::class, 'login'])->name('auth.login.page');
+    Route::post('logout', [AuthenticationController::class, 'logout'])->name('auth.logout');
 
     Route::middleware('auth')->group(function() {
         Route::get('dashboard', [AdminController::class, 'dashboard']);
