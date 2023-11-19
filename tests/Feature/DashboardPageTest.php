@@ -38,7 +38,7 @@ class DashboardPageTest extends TestCase
         $response = $this->get('/admin/dashboard');
 
         $response->assertStatus(302)
-                ->assertRedirect('/admin/login');
+                ->assertRedirect('/auth/login');
 
     }
 }

@@ -20,6 +20,8 @@ Route::prefix('auth')->group(function() {
     Route::post('login', [AuthenticationController::class, 'login'])->name('auth.login.page');
     Route::post('logout', [AuthenticationController::class, 'logout'])->name('auth.logout');
 
+});
+Route::prefix('admin')->group(function() {
     Route::middleware('auth')->group(function() {
         Route::get('dashboard', [AdminController::class, 'dashboard']);
     });

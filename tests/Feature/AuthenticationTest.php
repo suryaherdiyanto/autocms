@@ -34,7 +34,7 @@ class AuthenticationTest extends TestCase
 
         $response
             ->assertStatus(302)
-            ->assertRedirect('/auth/dashboard');
+            ->assertRedirect('/admin/dashboard');
 
         $this->assertAuthenticatedAs($user, 'web');
     }
@@ -61,7 +61,7 @@ class AuthenticationTest extends TestCase
         $response = $this->actingAs($user)
                         ->post('/auth/logout');
 
-        $response->assertRedirect('admin/login');
+        $response->assertRedirect('auth/login');
 
         $this->assertGuest();
 

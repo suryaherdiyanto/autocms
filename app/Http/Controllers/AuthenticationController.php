@@ -41,6 +41,6 @@ class AuthenticationController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('login.page');
+        return redirect()->route('auth.login.page');
     }
 }
