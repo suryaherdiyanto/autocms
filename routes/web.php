@@ -16,7 +16,7 @@ use App\Http\Controllers\{AdminController, AuthenticationController};
 
 Route::get('/', [AdminController::class, 'dashboard']);
 Route::prefix('auth')->group(function() {
-    Route::get('login', [AuthenticationController::class, 'loginPage'])->name('auth.login');
+    Route::get('login', [AuthenticationController::class, 'loginPage'])->middleware('guest')->name('auth.login');
     Route::post('login', [AuthenticationController::class, 'login'])->name('auth.login.page');
     Route::post('logout', [AuthenticationController::class, 'logout'])->name('auth.logout');
 

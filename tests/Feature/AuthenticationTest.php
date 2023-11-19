@@ -66,4 +66,14 @@ class AuthenticationTest extends TestCase
         $this->assertGuest();
 
     }
+
+    public function test_user_cannot_access_the_login_page_if_authenticated()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)
+                        ->get('auth/login');
+
+        $response->assertRedirect('admin/dashboard');
+    }
 }
