@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { usePage } from '@inertiajs/vue3';
+import { usePage, Link } from '@inertiajs/vue3';
 
 const page = usePage();
 </script>
@@ -30,7 +30,7 @@ const page = usePage();
 
                 <dib class="absolute w-full bg-white border rounded border-gray-200 left-0 top-full transition-all duration-200 translate-y-6 opacity-30 invisible group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
                     <a class="block p-4 text-sm border-b border-b-gray-200 hover:bg-gray-100" href="#"><i class="fas fa-user"></i>&nbsp; Profile</a>
-                    <a class="block p-4 text-sm border-b-gray-200 hover:bg-gray-100" href="#"><i class="fas fa-power-off"></i>&nbsp; Logout</a>
+                    <Link as="button" href="/auth/logout" class="w-full block p-4 text-sm border-b-gray-200 hover:bg-gray-100 text-left" method="post" type="button"><i class="fas fa-power-off"></i>&nbsp; Logout</Link>
                 </dib>
             </div>
         </div>

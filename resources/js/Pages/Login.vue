@@ -14,7 +14,7 @@ const loginForm = useForm({
             <h1 class="text-gray-800 text-xl text-center font-cairo mb-3">AutoCMS Login</h1>
             <div class="w-96">
                 <a-box>
-                    <form @submit.prevent="loginForm.post('/admin/login')" action="#">
+                    <form @submit.prevent="loginForm.post('/auth/login')" action="#">
                         <a-input v-model="loginForm.email" label="Email" :errorMessage="loginForm.errors.email"></a-input>
                         <a-input v-model="loginForm.password" label="Password" type="password"></a-input>
                         <div class="flex my-2">
