@@ -18,11 +18,16 @@ import ARow from '@/Components/ARow.vue';
 import AAlert from '@/Components/AAlert.vue';
 
 import { Notification, MessageBox } from "@/plugins";
+import LayoutVue from './Layout.vue';
 
 createInertiaApp({
     id: 'app',
     resolve: (name: string) => {
-      return resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob<DefineComponent>('./Pages/**/*.vue'));
+      const pages = import.meta.glob<DefineComponent>('./Pages/**/*.vue', { eager: true });
+      let page = pages[`./Pages/${name}.vue`];
+
+      page.default.layout = (['Login'].indexOf(name) > -1) ? undefined : LayoutVue;
+      return page;
     },
     setup({ el, App, props, plugin }) {
       createApp({ render: () => h(App, props) })
