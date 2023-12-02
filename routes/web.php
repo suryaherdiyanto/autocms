@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{AdminController, AuthenticationController};
+use App\Http\Controllers\{AdminController, AuthenticationController, PageController};
 
 /*
 |--------------------------------------------------------------------------
@@ -24,5 +24,6 @@ Route::prefix('auth')->group(function() {
 Route::prefix('admin')->group(function() {
     Route::middleware('auth')->group(function() {
         Route::get('dashboard', [AdminController::class, 'dashboard']);
+        Route::resource('pages', PageController::class);
     });
 });
