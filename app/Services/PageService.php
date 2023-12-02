@@ -2,42 +2,48 @@
 
 namespace App\Services;
 
+use App\Contracts\ResourceContract;
 use App\Models\Page;
-use App\DataTransferObjects\PageData;
+use Illuminate\Database\Eloquent\Collection;
 
-class PageService extends BaseService {
+class PageService implements ResourceContract {
 
-    public function createPage(PageData $data, Page $page)
+    public function __construct(private Page $page) {}
+
+    public function all(): Collection
     {
-        return $page->create([
-            'title' => $data->title,
-            'slug' => $data->slug,
-            'content' => $data->content,
-            'is_published' => $data->isPublished,
-            'meta_title' => $data->metaTitle,
-            'meta_description' => $data->metaDescription
-        ]);
+        return $this->page->all();
     }
 
-    public function updatePage(PageData $data, int $id)
+    public function find(string|int $primaryKey)
     {
-        $page = Page::findOrFail($id);
-        $data = [
-            'title' => $data->title,
-            'slug' => $data->slug,
-            'content' => $data->content,
-            'is_published' => $data->isPublished,
-            'meta_title' => $data->metaTitle,
-            'meta_description' => $data->metaDescription
-        ];
-
-
-        return $page->update(array_filter($data));
+        return $this->page->find($primaryKey);
     }
 
-    public function deletePage(int $id)
+    public function findOneBy(string $col, $value)
     {
-        Page::destroy($id);
+        return $this->page->where($col, $value)->first();
+    }
+
+    public function create(array $data)
+    {
+        return $this->page->create($data);
+    }
+
+    public function update(string|int $primaryKey, array $data)
+    {
+        $page = $this->find($primaryKey);
+        return $page->update($data);
+    }
+
+    public function delete(string|int $primaryKey)
+    {
+        return $this->page->destroy($primaryKey);
+    }
+
+    public function paginate(int $perPage)
+    {
+        return $this->page->paginate($perPage);
     }
 
 }
