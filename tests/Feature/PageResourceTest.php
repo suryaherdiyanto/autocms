@@ -76,7 +76,7 @@ class PageResourceTest extends TestCase
 
     public function test_validation_page_the_title_and_slug_should_not_grater_than_100_chars()
     {
-        $title = implode(' ', fake()->sentences(10));
+        $title = implode(' ', fake()->sentences(11));
         $page = Page::factory()->state([
             'title' => $title,
             'slug' => Str::slug('-', $title)
