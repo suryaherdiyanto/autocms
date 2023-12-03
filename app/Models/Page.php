@@ -13,7 +13,8 @@ class Page extends Model
         'title',
         'slug',
         'content',
-        'is_published',
+        'status',
+        'published_at',
         'meta_title',
         'meta_description'
     ];

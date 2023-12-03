@@ -25,8 +25,8 @@ class PageFactory extends Factory
             'content' => implode('', fake()->paragraphs(4)),
             'status' => $status,
             'published_at' => $status === 'published' ? now()->format('Y-m-d H:i:s'):null,
-            'meta_title' => '',
-            'meta_description' => ''
+            'meta_title' => $title,
+            'meta_description' => null
         ];
     }
 }

@@ -29,7 +29,7 @@ class PageController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('modules/page/Create');
     }
 
     /**
@@ -40,7 +40,8 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->page->create($request->only(['title', 'slug', 'status', 'content', 'meta_title', 'meta_description']));
+        return redirect()->back()->with('success', 'Page successfully created');
     }
 
     /**
