@@ -17,11 +17,14 @@ class PageFactory extends Factory
      */
     public function definition()
     {
+        $title = fake()->sentence();
+        $status = fake()->randomElement(['draft', 'published', 'review']);
         return [
-            'title' => fake()->sentence(),
-            'slug' => Str::slug(fake()->sentence(), '-'),
+            'title' => $title,
+            'slug' => Str::slug($title, '-'),
             'content' => implode('', fake()->paragraphs(4)),
-            'is_published' => fake()->randomElement([1, 0]),
+            'status' => $status,
+            'is_published' => $status === 'published' ? now()->format('Y-m-d H:i:s'):null,
             'meta_title' => '',
             'meta_description' => ''
         ];
