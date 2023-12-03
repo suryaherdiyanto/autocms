@@ -24,7 +24,6 @@ class PageFactory extends Factory
             'slug' => Str::slug($title, '-'),
             'content' => implode('', fake()->paragraphs(4)),
             'status' => $status,
-            'published_at' => $status === 'published' ? now()->format('Y-m-d H:i:s'):null,
             'meta_title' => $title,
             'meta_description' => null
         ];

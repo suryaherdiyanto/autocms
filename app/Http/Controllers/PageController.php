@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreatePageRequest;
 use App\Services\PageService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -38,9 +39,9 @@ class PageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreatePageRequest $request)
     {
-        $this->page->create($request->only(['title', 'slug', 'status', 'content', 'meta_title', 'meta_description']));
+        $this->page->create($request->safe()->all());
         return redirect()->back()->with('success', 'Page successfully created');
     }
 
